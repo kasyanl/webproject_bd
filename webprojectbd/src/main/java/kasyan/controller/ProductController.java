@@ -263,14 +263,14 @@ public class ProductController {
         return modelAndView;
     }
 
-//    @Autowired
-//    public void setProductService(ProductService productService) {
-//        this.productService = productService;
-//    }
+    @Autowired
+    public void setProductService(ProductService productService) {
+        this.productService = productService;
+    }
 
 
     @Autowired
-    public void setProductServiceBD(ProductServiceBD productServiceBD) {
+    public void setProductController(ProductServiceBD productServiceBD) {
         this.productServiceBD = productServiceBD;
     }
 }
