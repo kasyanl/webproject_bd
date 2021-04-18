@@ -3,11 +3,12 @@ package kasyan.bean;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "product")
@@ -16,30 +17,30 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class Product {
 
-    @Id
-    @GeneratedValue
+//    @Id
+//    @GeneratedValue
     @Column(name = "id")
-    @NotBlank
+ //   @NotBlank
     private int id;
 
     @Column(name = "category")
-    @NotBlank
+//    @NotBlank
     private String category;
 
     @Column(name = "name")
-    @NotBlank
+ //   @NotBlank
     private String name;
 
     @Column(name = "price")
-    @NotBlank
+//    @NotBlank
     private double price;
 
     @Column(name = "discount")
-    @NotBlank
+  //  @NotBlank
     private double discount;
 
     @Column(name = "actualPrice")
-    @NotBlank
+  //  @NotBlank
     private double actualPrice;
 
 }

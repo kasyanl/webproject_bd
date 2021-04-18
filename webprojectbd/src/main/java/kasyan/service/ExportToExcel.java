@@ -24,9 +24,9 @@ public class ExportToExcel {
         return listProduct;
     }
 
-    public static List<Product> exportCategoryList(String category){
-        return exportList(ProductService.fineCategoryForRead(category));
-    }
+//    public static List<Product> exportCategoryList(String category){
+//        return exportList(ProductService.fineCategoryForRead(category));
+//    }
 
 
     public static List <Product> exportList(List<Product> listProduct) {

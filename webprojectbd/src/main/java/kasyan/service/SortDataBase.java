@@ -6,7 +6,7 @@ import kasyan.repository.ProductRepository;
 import java.util.Comparator;
 import java.util.List;
 
-public final class SortDataBase implements ProductRepository {
+public final class SortDataBase {
     private SortDataBase() {
         throw new UnsupportedOperationException();
     }
