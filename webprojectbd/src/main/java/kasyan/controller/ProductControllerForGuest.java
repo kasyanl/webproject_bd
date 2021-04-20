@@ -1,8 +1,7 @@
 package kasyan.controller;
 
 import kasyan.exceptions.ProductNotFoundException;
-import kasyan.service.ExportToExcel;
-import kasyan.service.ProductService;
+import kasyan.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,14 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/product")
 public class ProductControllerForGuest {
 
-
-    private ProductService productService;
+    private ProductServiceImpl productServiceImpl;
 
     @GetMapping(value = "/allproductguest")
     public ModelAndView findAll() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/allproductguest");
-        modelAndView.addObject("product", productService.findAll());
+        modelAndView.addObject("product", productServiceImpl.getAllProduct());
         return modelAndView;
     }
 //
@@ -222,8 +220,8 @@ public class ProductControllerForGuest {
     }
 
     @Autowired
-    public void setStudentService(ProductService productService) {
-        this.productService = productService;
+    public  void setProductServiceImpl(ProductServiceImpl productServiceImpl){
+        this.productServiceImpl = productServiceImpl;
     }
 
 }

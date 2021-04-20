@@ -1,7 +1,7 @@
 package kasyan.controller;
 
 import kasyan.service.ExportToExcel;
-import kasyan.service.ProductService;
+import kasyan.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(value = "/")
 public class IndexController {
-    private ProductService productService;
+
+    private ProductServiceImpl productServiceImpl;
+
 
     @RequestMapping(method = RequestMethod.GET)
     public String index() {
@@ -43,18 +45,19 @@ public class IndexController {
     public ModelAndView exportExcel() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexcel");
-        modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAll()));
+        modelAndView.addObject("product", ExportToExcel.exportAllList(productServiceImpl.getAllProduct()));
         return modelAndView;
     }
     @GetMapping(value = "/exportexcelguest")
     public ModelAndView exportExcelGuest() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/exportexcelguest");
-        modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAll()));
+        modelAndView.addObject("product", ExportToExcel.exportAllList(productServiceImpl.getAllProduct()));
         return modelAndView;
     }
+
     @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
+    public  void setProductServiceImpl(ProductServiceImpl productServiceImpl){
+        this.productServiceImpl = productServiceImpl;
     }
 }
