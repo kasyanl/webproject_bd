@@ -12,14 +12,14 @@ import java.util.List;
 @Service
 public class ProductService extends SQLConfiguration implements InitializingBean {
 
-    public static int COUNTER;
+
     public List<Product> findAll() {
         return findProductFromBD("SELECT id, category, name, price, discount, actualPrice FROM product");
     }
 
     public void save(String category, String name, double price, double discount) {
         List<Product> newList = findAll();
-        int id = COUNTER;
+        int id = 0;
         if (!newList.isEmpty()) {
             SortDataBase.sortById(newList);
             int i = 1;
@@ -56,7 +56,7 @@ public class ProductService extends SQLConfiguration implements InitializingBean
         String select = "";
         for (Product product : newList) {
             if (product.getId() == id)
-                select = "DELETE * FROM product WHERE id=" + id + "";
+                select = "DELETE FROM product WHERE id=" + id + "";
             selectBD(select);
         }
         newList.removeIf(nextProduct -> nextProduct.getId() == id);
@@ -69,8 +69,9 @@ public class ProductService extends SQLConfiguration implements InitializingBean
         product.setPrice(price);
         product.setDiscount(discount);
         product.setActualPrice(calculating(product.getPrice(), product.getDiscount()));
+        double actualPrice = calculating(price, discount);
         String select = "UPDATE product SET category='" + category + "', name='" + name + "', price=" + price +
-                ", discount=" + discount + "actualPrice=" + calculating(price, discount) + " WHERE id=" + product.getId()+ "";
+                ", discount=" + discount + "actualPrice=" + actualPrice + " WHERE id=" + id+ "";
         selectBD(select);
 
     }
