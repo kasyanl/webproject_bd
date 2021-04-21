@@ -1,8 +1,6 @@
 package kasyan.bean;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.Id;
 
@@ -13,6 +11,8 @@ import javax.persistence.Table;
 
 @Table(name = "product")
 @Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product{

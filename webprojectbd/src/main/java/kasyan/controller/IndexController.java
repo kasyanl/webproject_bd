@@ -1,7 +1,7 @@
 package kasyan.controller;
 
 import kasyan.service.ExportToExcel;
-import kasyan.service.impl.ProductServiceImpl;
+import kasyan.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.SQLException;
+
 @Controller
 @RequestMapping(value = "/")
 public class IndexController {
 
-    private ProductServiceImpl productServiceImpl;
+    private ProductService productService;
 
 
     @RequestMapping(method = RequestMethod.GET)
@@ -42,22 +44,22 @@ public class IndexController {
     }
 
     @GetMapping(value = "/exportexcel")
-    public ModelAndView exportExcel() {
+    public ModelAndView exportExcel() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexcel");
-        modelAndView.addObject("product", ExportToExcel.exportAllList(productServiceImpl.getAllProduct()));
+        modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAll()));
         return modelAndView;
     }
     @GetMapping(value = "/exportexcelguest")
-    public ModelAndView exportExcelGuest() {
+    public ModelAndView exportExcelGuest() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/exportexcelguest");
-        modelAndView.addObject("product", ExportToExcel.exportAllList(productServiceImpl.getAllProduct()));
+        modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAll()));
         return modelAndView;
     }
 
     @Autowired
-    public  void setProductServiceImpl(ProductServiceImpl productServiceImpl){
-        this.productServiceImpl = productServiceImpl;
+    public  void setProductService(ProductService productService){
+        this.productService = productService;
     }
 }

@@ -1,7 +1,6 @@
 package kasyan.service;
 
 import kasyan.bean.Product;
-import kasyan.repository.ProductRepository;
 
 import java.util.Comparator;
 import java.util.List;

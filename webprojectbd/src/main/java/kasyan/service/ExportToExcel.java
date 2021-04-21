@@ -5,6 +5,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -17,16 +18,16 @@ public class ExportToExcel {
 
     private ExportToExcel() {
     }
-
+    private ProductService productService;
 
     public static List<Product>exportAllList(List<Product> listProduct){
         exportList(listProduct);
         return listProduct;
     }
 
-//    public static List<Product> exportCategoryList(String category){
-//        return exportList(ProductService.fineCategoryForRead(category));
-//    }
+    public List<Product> exportCategoryList(String category){
+        return exportList(productService.fineCategoryForRead(category));
+    }
 
 
     public static List <Product> exportList(List<Product> listProduct) {
@@ -87,5 +88,10 @@ public class ExportToExcel {
             e.printStackTrace();
         }
         return listProduct;
+    }
+
+    @Autowired
+    public  void setProductService(ProductService productService){
+        this.productService = productService;
     }
 }
