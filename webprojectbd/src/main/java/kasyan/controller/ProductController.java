@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.sql.SQLException;
-
 @Controller
 @RequestMapping(value = "/product")
 public class ProductController {
@@ -22,13 +20,6 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/allproduct");
         modelAndView.addObject("product", productService.findAll());
-        return modelAndView;
-    }
-
-    @GetMapping
-    public ModelAndView findById(@RequestParam(value = "id") int id) throws ProductNotFoundException {
-        ModelAndView modelAndView = new ModelAndView("productcard");
-        modelAndView.addObject("product", productService.findById(id));
         return modelAndView;
     }
 

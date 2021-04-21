@@ -1,12 +1,15 @@
-package kasyan.util;
+package kasyan.repository;
 
+import kasyan.bean.Person;
 import kasyan.bean.Product;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SQLConfiguration {
+@Slf4j
+public class RepositoryService {
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3306/product?serverTimezone=Europe/Minsk&useSSL=false";
@@ -14,6 +17,7 @@ public class SQLConfiguration {
     private static final String PASSWORD = "kasyan123";
 
 
+    //запрос на вывод Product данных из БД (формирование List)
     public List<Product> findProductFromBD(String sqlSelect) {
         List<Product> productList = new ArrayList<>();
         Connection conn = null;
@@ -25,6 +29,7 @@ public class SQLConfiguration {
 
             ResultSet rs = statement.executeQuery(sqlSelect);
 
+            //формирование List Product из БД
             while (rs.next()) {
 
                 int id = rs.getInt("id");
@@ -57,6 +62,7 @@ public class SQLConfiguration {
         return productList;
     }
 
+    //запрос на изменение (удаление, добавлене, обновление) Product в БД
     public void selectBD(String sqlSelect) {
 
         Connection conn = null;
@@ -66,9 +72,9 @@ public class SQLConfiguration {
             conn = DriverManager.getConnection(URL, LOGIN, PASSWORD);
             statement = conn.createStatement();
 
-            ResultSet rs = statement.executeQuery(sqlSelect);
+            int rs = statement.executeUpdate(sqlSelect);
+            log.info("Product is {}", rs);
 
-            rs.close();
             statement.close();
             conn.close();
         } catch (Exception se) {
@@ -88,26 +94,25 @@ public class SQLConfiguration {
         }
     }
 
-    public Product findByIdFromBD(String sqlSelect) {
-
-        Product product = new Product();
+    //запрос на вывод Person данных из БД (формирование List)
+    public List<Person> findPersonFromBD(String sqlSelect) {
+        List<Person> personList = new ArrayList<>();
         Connection conn = null;
         Statement statement = null;
         try {
             Class.forName(DRIVER);
             conn = DriverManager.getConnection(URL, LOGIN, PASSWORD);
             statement = conn.createStatement();
+
             ResultSet rs = statement.executeQuery(sqlSelect);
 
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String category = rs.getString("category");
-                String name = rs.getString("name");
-                double price = rs.getDouble("price");
-                double discount = rs.getDouble("discount");
-                double actualPrice = rs.getDouble("actualPrice");
 
-                product = new Product(id, category, name, price, discount, actualPrice);
+                int id = rs.getInt("id");
+                String login = rs.getString("login");
+                String password = rs.getString("password");
+
+                personList.add(new Person(id, login, password));
             }
             rs.close();
             statement.close();
@@ -127,7 +132,6 @@ public class SQLConfiguration {
                 se.printStackTrace();
             }
         }
-        return product;
+        return personList;
     }
-
 }

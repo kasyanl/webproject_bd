@@ -44,14 +44,14 @@ public class IndexController {
     }
 
     @GetMapping(value = "/exportexcel")
-    public ModelAndView exportExcel() throws SQLException {
+    public ModelAndView exportExcel(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexcel");
         modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAll()));
         return modelAndView;
     }
     @GetMapping(value = "/exportexcelguest")
-    public ModelAndView exportExcelGuest() throws SQLException {
+    public ModelAndView exportExcelGuest(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/exportexcelguest");
         modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAll()));
