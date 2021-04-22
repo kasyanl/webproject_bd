@@ -20,7 +20,7 @@ public class PersonService extends RepositoryService implements InitializingBean
         return false;
     }
 
-    // получение всех пользователей их БД
+    // отправка запроса на получение всех пользователей их БД
     public List<Person> findAllPerson() {
         String select = "SELECT id, login, password FROM person";
         return findPersonFromBD(select);

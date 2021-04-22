@@ -8,6 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.SQLException;
+
+// Контроллер для работы с залогининым пользователем
+
 @Controller
 @RequestMapping(value = "/product")
 public class ProductController {
@@ -15,6 +19,7 @@ public class ProductController {
     private ProductService productService;
     private ExportToExcel exportToExcel;
 
+    // получение всего списка продуктов из основной БД
     @GetMapping(value = "/allproduct")
     public ModelAndView findAll(){
         ModelAndView modelAndView = new ModelAndView();
@@ -23,11 +28,22 @@ public class ProductController {
         return modelAndView;
     }
 
+    // получение всего списка продуктов из корзины
+    @GetMapping(value = "/alldeletedproduct")
+    public ModelAndView findAllDeletedProduct(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("adminpages/alldeleteproducts");
+        modelAndView.addObject("product", productService.findAllDeleted());
+        return modelAndView;
+    }
+
+    // получение страницы с формой для добавления продукта
     @GetMapping(value = "/addproduct")
     public String addproduct() {
         return "adminpages/addproduct";
     }
 
+    // отправка данных для добавления продуктов в БД и перенаправления на страницу со всем списком
     @PostMapping(value = "/addproduct")
     public ModelAndView add(@RequestParam(value = "category") String category,
                             @RequestParam(value = "name") String name,
@@ -37,12 +53,28 @@ public class ProductController {
         return new ModelAndView("redirect:/product/allproduct");
     }
 
+    // получение страницы с сообщением, что продукт удален из основной БД
     @GetMapping(value = "/deleteproduct")
     public ModelAndView deleteproduct(@RequestParam(value = "id") int id) throws ProductNotFoundException {
           productService.delete(id);
         return new ModelAndView("adminpages/deleteproduct");
     }
 
+    // получение страницы с сообщением, что продукт удален из корзины
+    @GetMapping(value = "/deleteproductbasket")
+    public ModelAndView deleteproductbasket(@RequestParam(value = "id") int id) throws ProductNotFoundException {
+        productService.deleteBasket(id);
+        return new ModelAndView("adminpages/deleteproductbasket");
+    }
+
+    // получение страницы с сообщением, что продукт восстановлен
+    @GetMapping(value = "/recoveredproduct")
+    public ModelAndView recoveredProduct(@RequestParam(value = "id") int id){
+        productService.recovered(id);
+        return new ModelAndView("adminpages/recoveredproduct");
+    }
+
+    // получение страницы с формой для редактирования данных продукта
      @GetMapping(value = "/editproduct")
     public ModelAndView edit(@RequestParam(value = "id") int id) throws ProductNotFoundException {
         ModelAndView modelAndView = new ModelAndView("adminpages/editproduct");
@@ -50,6 +82,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // отправка обновленных данных в БД и перенаправление на страницу со всем списком
     @PostMapping(value = "/editproduct")
     public ModelAndView edit(@RequestParam(value = "id") int id,
                              @RequestParam(value = "category") String category,
@@ -60,6 +93,7 @@ public class ProductController {
         return new ModelAndView("redirect:/product/allproduct");
     }
 
+    // сортировка списка по ID (от меньшего к большему)
     @GetMapping(value = "/sortbyid")
     public ModelAndView sortById() {
         ModelAndView modelAndView = new ModelAndView();
@@ -68,6 +102,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // сортировка списка по ID (от большего к меньшему)
     @GetMapping(value = "/sortbyidreverse")
     public ModelAndView sortByIdReverse() {
         ModelAndView modelAndView = new ModelAndView();
@@ -76,6 +111,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // сортировка списка по категории (от A к Z)
     @GetMapping(value = "/sortbycategory")
     public ModelAndView sortByCategory() {
         ModelAndView modelAndView = new ModelAndView();
@@ -84,6 +120,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // сортировка списка по категории (от Z к A)
     @GetMapping(value = "/sortbycategoryreverse")
     public ModelAndView sortByCategoryReverse() {
         ModelAndView modelAndView = new ModelAndView();
@@ -92,6 +129,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // сортировка списка по названию (A -> Z)
     @GetMapping(value = "/sortbyname")
     public ModelAndView sortByName() {
         ModelAndView modelAndView = new ModelAndView();
@@ -100,6 +138,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // сортировка списка по названию (Z -> A)
     @GetMapping(value = "/sortbynamereverse")
     public ModelAndView sortByNameReverse() {
         ModelAndView modelAndView = new ModelAndView();
@@ -108,6 +147,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // сортировка списка по цене (от меньшего к большему)
     @GetMapping(value = "/sortbyprice")
     public ModelAndView sortByPrice() {
         ModelAndView modelAndView = new ModelAndView();
@@ -116,6 +156,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // сортировка списка по цене (от большего к меньшему)
     @GetMapping(value = "/sortbypricereverse")
     public ModelAndView sortByPriceReverse() {
         ModelAndView modelAndView = new ModelAndView();
@@ -124,6 +165,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // сортировка списка по скидке (от меньшего к большему)
     @GetMapping(value = "/sortbydiscount")
     public ModelAndView sortByDiscount() {
         ModelAndView modelAndView = new ModelAndView();
@@ -132,6 +174,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // сортировка списка по скидке (от большего к меньшему)
     @GetMapping(value = "/sortbydiscountreverse")
     public ModelAndView sortByDiscountReverse() {
         ModelAndView modelAndView = new ModelAndView();
@@ -140,6 +183,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // сортировка списка по конечной цене (от меньшего к большему)
     @GetMapping(value = "/sortbyactualprice")
     public ModelAndView sortByActualPrice() {
         ModelAndView modelAndView = new ModelAndView();
@@ -148,6 +192,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // сортировка списка по конечной цене (от большего к меньшему)
     @GetMapping(value = "/sortbyactualpricereverse")
     public ModelAndView sortByActualPriceReverse() {
         ModelAndView modelAndView = new ModelAndView();
@@ -156,6 +201,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // получение списка категории FRUITS
     @GetMapping(value = "/finefruits")
     public ModelAndView fineFruits() {
         ModelAndView modelAndView = new ModelAndView();
@@ -164,6 +210,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // получение списка категории BERRIES
     @GetMapping(value = "/fineberries")
     public ModelAndView fineBerries() {
         ModelAndView modelAndView = new ModelAndView();
@@ -172,6 +219,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // получение списка категории VEGETABLES
     @GetMapping(value = "/finevegetables")
     public ModelAndView fineVegetables() {
         ModelAndView modelAndView = new ModelAndView();
@@ -180,6 +228,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // получение списка категории MILK_PRODUCT
     @GetMapping(value = "/finemilkproduct")
     public ModelAndView fineMilkProduct() {
         ModelAndView modelAndView = new ModelAndView();
@@ -188,6 +237,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // получение списка категории ALCOHOLIC_BEVERAGES
     @GetMapping(value = "/finealcohol")
     public ModelAndView fineAlcohol() {
         ModelAndView modelAndView = new ModelAndView();
@@ -196,6 +246,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // получение списка категории MEAT
     @GetMapping(value = "/finemeat")
     public ModelAndView fineMeat() {
         ModelAndView modelAndView = new ModelAndView();
@@ -204,6 +255,7 @@ public class ProductController {
         return modelAndView;
     }
 
+    // получение списка категории ALCOHOLIC_BEVERAGES
     @GetMapping(value = "/exportexcel/alcohol")
     public ModelAndView exportExcelAlcohol() {
         ModelAndView modelAndView = new ModelAndView();
@@ -211,6 +263,8 @@ public class ProductController {
         modelAndView.addObject("product", exportToExcel.exportCategoryList("ALCOHOLIC_BEVERAGES"));
         return modelAndView;
     }
+
+    // экспорт списка категории BERRIES в excel
     @GetMapping(value = "/exportexcel/berries")
     public ModelAndView exportExcelBerries() {
         ModelAndView modelAndView = new ModelAndView();
@@ -218,6 +272,8 @@ public class ProductController {
         modelAndView.addObject("product", exportToExcel.exportCategoryList("BERRIES"));
         return modelAndView;
     }
+
+    // экспорт списка категории FRUITS в excel
     @GetMapping(value = "/exportexcel/fruits")
     public ModelAndView exportExcelFruits() {
         ModelAndView modelAndView = new ModelAndView();
@@ -225,6 +281,8 @@ public class ProductController {
         modelAndView.addObject("product", exportToExcel.exportCategoryList("FRUITS"));
         return modelAndView;
     }
+
+    // экспорт списка категории MEAT в excel
     @GetMapping(value = "/exportexcel/meat")
     public ModelAndView exportExcelMeat() {
         ModelAndView modelAndView = new ModelAndView();
@@ -232,6 +290,8 @@ public class ProductController {
         modelAndView.addObject("product", exportToExcel.exportCategoryList("MEAT"));
         return modelAndView;
     }
+
+    // экспорт списка категории MILK_PRODUCT в excel
     @GetMapping(value = "/exportexcel/milk")
     public ModelAndView exportExcelMikl() {
         ModelAndView modelAndView = new ModelAndView();
@@ -239,6 +299,8 @@ public class ProductController {
         modelAndView.addObject("product", exportToExcel.exportCategoryList("MILK_PRODUCT"));
         return modelAndView;
     }
+
+    // экспорт списка категории VEGETABLES в excel
     @GetMapping(value = "/exportexcel/vegetables")
     public ModelAndView exportExcelVegetables() {
         ModelAndView modelAndView = new ModelAndView();
@@ -246,15 +308,6 @@ public class ProductController {
         modelAndView.addObject("product", exportToExcel.exportCategoryList("VEGETABLES"));
         return modelAndView;
     }
-
-
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ModelAndView handleStudentNotFoundException(ProductNotFoundException exception) {
-        ModelAndView modelAndView = new ModelAndView("usernotfound");
-        modelAndView.addObject("exception", exception.getMessage());
-        return modelAndView;
-    }
-
 
     @Autowired
     public  void setProductServiceImpl(ProductService productService){
@@ -264,6 +317,4 @@ public class ProductController {
     public  void setExportToExcel(ExportToExcel exportToExcel){
         this.exportToExcel = exportToExcel;
     }
-
 }
-

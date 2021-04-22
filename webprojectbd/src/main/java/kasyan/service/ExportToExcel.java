@@ -20,41 +20,45 @@ public class ExportToExcel {
     }
     private ProductService productService;
 
+    // сервис для экспорта всего списка продуктов в excel
     public static List<Product>exportAllList(List<Product> listProduct){
         exportList(listProduct);
         return listProduct;
     }
 
+    // сервис на экспорт списка продуктов одной категории в excel
     public List<Product> exportCategoryList(String category){
         return exportList(productService.fineCategoryForRead(category));
     }
 
-
+    // формирование таблицы excel и добавление данных из List
     public static List <Product> exportList(List<Product> listProduct) {
         HSSFWorkbook workbook = new HSSFWorkbook();
-        Sheet sheet = workbook.createSheet("List products");
-        sheet.setDefaultColumnWidth(25);
+        Sheet sheet = workbook.createSheet("List products"); //название вкладки
+        sheet.setDefaultColumnWidth(25); // высота строк
 
-        Row row = sheet.createRow(0);
+        // даем название колонок таблицы
+        Row row = sheet.createRow(0); // первая строка
 
         Cell idTop = row.createCell(0);
-        idTop.setCellValue("id");
+        idTop.setCellValue("id"); // название первого столбца
 
         Cell categoryTop = row.createCell(1);
-        categoryTop.setCellValue("Category");
+        categoryTop.setCellValue("Category");// название второго столбца
 
         Cell nameTop = row.createCell(2);
-        nameTop.setCellValue("Name");
+        nameTop.setCellValue("Name");// название третьего столбца
 
         Cell priceTop = row.createCell(3);
-        priceTop.setCellValue("Price, BYN");
+        priceTop.setCellValue("Price, BYN");// название четвертого столбца
 
         Cell discountTop = row.createCell(4);
-        discountTop.setCellValue("Discount, %");
+        discountTop.setCellValue("Discount, %");// название пятого столбца
 
         Cell actualPriceTop = row.createCell(5);
-        actualPriceTop.setCellValue("Actual price, BYN");
+        actualPriceTop.setCellValue("Actual price, BYN");// название шестого столбца
 
+        // добавляем данные из List
         int i = 1;
         for(Product product : listProduct){
             Row rowProduct = sheet.createRow(i);
@@ -78,7 +82,7 @@ public class ExportToExcel {
 
             i++;
         }
-
+        // название и путь для нашего файла (по умолчанию в корне проекта)
         String filename = "productlist.xls";
 
         try (FileOutputStream out = new FileOutputStream(filename)) {

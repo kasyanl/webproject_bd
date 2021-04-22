@@ -11,11 +11,10 @@ import java.util.List;
 @Slf4j
 public class RepositoryService {
 
-    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/product?serverTimezone=Europe/Minsk&useSSL=false";
-    private static final String LOGIN = "kasyanl";
-    private static final String PASSWORD = "kasyan123";
-
+    private static final String DRIVER="com.mysql.cj.jdbc.Driver";
+    private static final String URL="jdbc:mysql://localhost:3306/product?serverTimezone=Europe/Minsk&useSSL=false";
+    private static final String LOGIN="kasyanl";
+    private static final String PASSWORD="kasyan123";
 
     //запрос на вывод Product данных из БД (формирование List)
     public List<Product> findProductFromBD(String sqlSelect) {
@@ -94,7 +93,52 @@ public class RepositoryService {
         }
     }
 
-    //запрос на вывод Person данных из БД (формирование List)
+    //запрос на вывод Product данных из корзины (формирование List)
+    public List<Product> findDeleteProductFromBD(String sqlSelect) {
+        List<Product> productListDel = new ArrayList<>();
+        Connection conn = null;
+        Statement statement = null;
+        try {
+            Class.forName(DRIVER);
+            conn = DriverManager.getConnection(URL, LOGIN, PASSWORD);
+            statement = conn.createStatement();
+
+            ResultSet rs = statement.executeQuery(sqlSelect);
+
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+                String category = rs.getString("category");
+                String name = rs.getString("name");
+                double price = rs.getDouble("price");
+                double discount = rs.getDouble("discount");
+                double actualPrice = rs.getDouble("actualPrice");
+                String data = rs.getString("data");
+
+                productListDel.add(new Product(id, category, name, price, discount, actualPrice, data));
+            }
+            rs.close();
+            statement.close();
+            conn.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if (statement != null)
+                    statement.close();
+            } catch (SQLException ignored) {
+            }
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return productListDel;
+    }
+
+    //запрос на получение Person данных из БД (формирование List)
     public List<Person> findPersonFromBD(String sqlSelect) {
         List<Person> personList = new ArrayList<>();
         Connection conn = null;

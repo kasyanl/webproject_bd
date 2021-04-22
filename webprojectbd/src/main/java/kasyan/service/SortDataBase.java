@@ -5,6 +5,8 @@ import kasyan.bean.Product;
 import java.util.Comparator;
 import java.util.List;
 
+// класс для сортировки нанных
+
 public final class SortDataBase {
     private SortDataBase() {
         throw new UnsupportedOperationException();

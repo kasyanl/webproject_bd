@@ -12,30 +12,41 @@ import java.util.List;
 @Service
 public class ProductService extends RepositoryService implements InitializingBean {
 
-    //отправка запроса на получение всех продуктов
+    //отправка запроса на получение всех продуктов из основной БД
     public List<Product> findAll() {
         String select = "SELECT id, category, name, price, discount, actualPrice FROM product";
         return findProductFromBD(select);
     }
 
+    //отправка запроса на получение всех ранее удаленных продуктов из основной БД
+    public List<Product> findAllDeleted() {
+        String select = "SELECT id, category, name, price, discount, actualPrice, data FROM productofdelete";
+        return findDeleteProductFromBD(select);
+    }
+
     /* отправка запроса на добавление новой записи в БД Product
-    с одновременной проверкой ID (если есть пропуск (например 2, 3, ,5 то будет присвоен id=4))
     и автоматическим расчетом цены с учетом скидки */
     public void save(String category, String name, double price, double discount) {
         List<Product> newList = findAll();
-        int id = 0;
-        if (!newList.isEmpty()) {
-            SortDataBase.sortById(newList);
-            int i = 1;
-            for (Product product : newList) {
-                if (product.getId() == i) i++;
-                id = i;
-            }
-        } else id = newList.size();
+        int id = createId(newList);
         double actualPrice = calculating(price, discount);
         String select = "INSERT product (id, category, name, price, discount, actualPrice) VALUES (" + id +
                 " ,'" + category + "' ,'" + name + "' ," + price + " ," + discount + " ," + actualPrice + ")";
         selectBD(select);
+    }
+
+    // формирование ID с одновременной проверкой (если есть пропуск (например 2, 3, ,5 то будет присвоен id=4))
+    public int createId (List<Product> newList){
+        int id = 0; // по умолчанию id = 0
+        if (!newList.isEmpty()) { // если записи имеются, проверяем на пропущенные id
+            SortDataBase.sortById(newList); //сортируем для корректной проверки
+            int i = 0;
+            for (Product product : newList) { // проверяем
+                if (product.getId() == i) i++; // теперь i больше текущего id на 1
+                id = i; // присваиваем значение id (здесь id на 1 больше последнего проверенного)
+            }
+        }
+        return id;
     }
 
     // метод для расчета стоимости с учетом скидки
@@ -54,27 +65,57 @@ public class ProductService extends RepositoryService implements InitializingBea
         throw new ProductNotFoundException("Product with id=" + id + " not found!");
     }
 
-    //находим Product по его ID и отправка запроса в БД
-    public void delete(int id){
+    //находим Product по его ID и отправка запроса в БД для удаления и одновременно добавления в "корзину" (и добавляем дату удаления)
+    public void delete(int id) {
         List<Product> newList = findAll();
         String select = "";
+        String deleteProduct = "";
         for (Product product : newList) {
             if (product.getId() == id) {
                 select = "DELETE FROM product WHERE id=" + id;
+                deleteProduct = "INSERT productofdelete (id, category, name, price, discount, actualPrice, data) VALUES (" + id +
+                        " ,'" + product.getCategory() + "' ,'" + product.getName() + "' ," + product.getPrice() + " ," +
+                        product.getDiscount() + " ," + product.getActualPrice() + ", NOW())";
                 break;
             }
         }
-        selectBD(select);
+        selectBD(select); // отправка запроса на удаление из основной БД
+        selectBD(deleteProduct); // отправка запроса на добавление в корзину
+    }
+
+    //находим Product по его ID  в корзине и отправка запроса для удаления
+    public void deleteBasket(int id) {
+        List<Product> newList = findAllDeleted();
+        String select = "";
+        for (Product product : newList) {
+            if (product.getId() == id) {
+                select = "DELETE FROM productofdelete WHERE id=" + id;
+                break;
+            }
+        }
+        selectBD(select); // отправка запроса на удаление из основной БД
+    }
+
+    //восстанавливаем удаленный ранее Product по его ID и отправка запроса в БД
+    public void recovered(int id) {
+        List<Product> newList = findAllDeleted();
+        String selectDel = "";
+        for (Product product : newList) {
+            if (product.getId() == id) {
+                save(product.getCategory(), product.getName(), product.getPrice(), product.getDiscount()); // добавление в основную БД
+                selectDel = "DELETE FROM productofdelete WHERE id=" + id; // запрос на удаление из корзины
+                break;
+            }
+        }
+        selectBD(selectDel);
     }
 
     // отправляем запрос в БД на обновление Product по ID
-    public void update(int id, String category, String name, double price, double discount) throws ProductNotFoundException {
-        Product product = findById(id);
+    public void update(int id, String category, String name, double price, double discount){
         double actualPrice = calculating(price, discount);
         String select = "UPDATE product SET category='" + category + "', name='" + name + "', price=" + price +
                 ", discount=" + discount + ", actualPrice=" + actualPrice + " WHERE id=" + id;
         selectBD(select);
-
     }
 
     // ищем все Products одной категории и отправляем в БД соответствующий запрос
@@ -86,7 +127,7 @@ public class ProductService extends RepositoryService implements InitializingBea
                 newListForRead.add(product);
             }
         }
-        String select = "SELECT id, category, name, price, discount, actualPrice FROM product WHERE category='"+category+"'";
+        String select = "SELECT id, category, name, price, discount, actualPrice FROM product WHERE category='" + category + "'";
         findProductFromBD(select);
         return newListForRead;
     }
@@ -136,7 +177,6 @@ public class ProductService extends RepositoryService implements InitializingBea
     }
 
     @Override
-    public void afterPropertiesSet(){
-
+    public void afterPropertiesSet() {
     }
 }

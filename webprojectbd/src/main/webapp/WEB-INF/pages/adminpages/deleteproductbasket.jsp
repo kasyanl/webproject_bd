@@ -9,18 +9,18 @@
 <%@include file="../header.jsp"%>
 <%@include file="nav.jsp"%>
 <h2>Удаление продукта</h2>
-<h3>Продукт удален!!</h3>
+<h3>Продукт удален  из корзины!!</h3>
 <c:forEach items="${product}">
-<tr>
-    <td colspan="2" align="center">product.getCategory()</td>
-    <td colspan="2" align="center">product.getName()</td>
+    <tr>
+        <td colspan="2" align="center">product.getCategory()</td>
+        <td colspan="2" align="center">product.getName()</td>
     </tr>
 </c:forEach>
 <form action="${pageContext.request.contextPath}/product/allproduct?id=${product.getId()}" method="get">
     <input type="submit" value="Список продуктов">
 </form>
 <form action="${pageContext.request.contextPath}/product/alldeletedproduct" method="get">
-    <input type="submit" value="Восстановить запись">
+    <input type="submit" value="в корзину">
 </form>
 <%@include file="../footer.jsp"%>
 <br>
