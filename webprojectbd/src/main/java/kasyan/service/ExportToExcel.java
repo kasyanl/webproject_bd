@@ -84,7 +84,7 @@ public class ExportToExcel {
             i++;
         }
         // название и путь для нашего файла (по умолчанию в корне проекта)
-        String filename = "productlist.xls";
+        String filename = "src/main/webapp/WEB-INF/downloads/xls/productlist.xls";
 
         try (FileOutputStream out = new FileOutputStream(filename)) {
             workbook.write(out);
