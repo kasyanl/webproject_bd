@@ -30,7 +30,7 @@ public class PersonController {
             // перенаправление на ветку юзера (логин и пароль совпали)
             return new ModelAndView("redirect:currentlogin");
         }
-        // перенаправление на страницу с формой (логин и/или пароль не совпали)
+        // перенаправление на страницу с формой для повторного логирования (логин и/или пароль не совпали)
         return new ModelAndView("redirect:nocurrentlogin");
     }
 
@@ -50,5 +50,4 @@ public class PersonController {
     public void setPersonService(PersonService personService) {
         this.personService = personService;
     }
-
 }

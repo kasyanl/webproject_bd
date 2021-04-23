@@ -47,7 +47,7 @@ public class IndexController {
 
     // экспорт данных из корзины в excel
     @GetMapping(value = "/exportexceldel")
-    public ModelAndView exportExcelDel(){
+    public ModelAndView exportExcelDel() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexceldel");
         modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAllDeleted()));
@@ -56,7 +56,7 @@ public class IndexController {
 
     // экспорт данных  в excel основной БД для юзера
     @GetMapping(value = "/exportexcel")
-    public ModelAndView exportExcel(){
+    public ModelAndView exportExcel() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexcel");
         modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAll()));
@@ -65,7 +65,7 @@ public class IndexController {
 
     // экспорт данных  в excel основной БД для гостя
     @GetMapping(value = "/exportexcelguest")
-    public ModelAndView exportExcelGuest(){
+    public ModelAndView exportExcelGuest() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/exportexcelguest");
         modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAll()));
@@ -73,7 +73,7 @@ public class IndexController {
     }
 
     @Autowired
-    public  void setProductService(ProductService productService){
+    public void setProductService(ProductService productService) {
         this.productService = productService;
     }
 }

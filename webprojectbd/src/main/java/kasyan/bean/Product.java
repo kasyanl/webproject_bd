@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product{
+public class Product {
 
     private int id;
     private String category;
@@ -27,5 +27,3 @@ public class Product{
         this.actualPrice = actualPrice;
     }
 }
-
-

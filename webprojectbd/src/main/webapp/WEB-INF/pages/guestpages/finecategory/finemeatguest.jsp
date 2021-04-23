@@ -11,7 +11,9 @@
 <%@include file="../../header.jsp"%>
 <%@include file="../navguest.jsp"%>
 <h1>Продукты категории MEAT:</h1>
-<h3 align="right"><a href="${pageContext.request.contextPath}/product/exportexcel/meatguest">Экспорт в Excel файл</a></h3>
+<h3 align="right"><a href="${pageContext.request.contextPath}/product/exportexcel/meatguest">
+    <input type="image" src="https://macadmins.software/icons/excel.png"
+           width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a></h3>
 <table class="table" align="center">
     <tr>
         <th width="100" align="center"><b> ID</b></th>

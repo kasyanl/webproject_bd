@@ -6,11 +6,14 @@
     <meta charset="UTF-8">
     <title>Система учета продуктов</title>
 </head>
-<body align="center" background="http://sensitiv-eysk.ru/wp-content/uploads/2017/06/opera-background-light-blue.jpg" bgcolor="#CCFFCC">
-<%@include file="../../header.jsp"%>
-<%@include file="../nav.jsp"%>
+<body align="center" background="http://sensitiv-eysk.ru/wp-content/uploads/2017/06/opera-background-light-blue.jpg"
+      bgcolor="#CCFFCC">
+<%@include file="../../header.jsp" %>
+<%@include file="../nav.jsp" %>
 <h1>Продукты категории ALCOHOLIC_BEVERAGES:</h1>
-<h3 align="right"><a href="${pageContext.request.contextPath}/product/exportexcel/alcohol">Экспорт в Excel файл</a></h3>
+<h3 align="right"><a href="${pageContext.request.contextPath}/product/exportexcel/alcohol">
+    <input type="image" src="https://macadmins.software/icons/excel.png"
+           width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a></h3>
 <table class="table" align="center">
     <tr>
         <th width="100" align="center"><b> ID</b></th>
@@ -30,8 +33,12 @@
             <td><c:out value="${product.getPrice()}"/></td>
             <td><c:out value="${product.getDiscount()}"/></td>
             <td><c:out value="${product.getActualPrice()}"/></td>
-            <td><a href="${pageContext.request.contextPath}/product/deleteproduct?id=${product.getId()}">Удалить</a></td>
-            <td><a href="${pageContext.request.contextPath}/product/editproduct?id=${product.getId()}">Изменить</a></td>
+            <td><a href="${pageContext.request.contextPath}/product/deleteproduct?id=${product.getId()}"
+                   onclick="return confirm('Удалить продукт <${product.getName()}> категории <${product.getCategory()}>?')"><input
+                    type="submit" value="Удалить"></a></td>
+            <td><a href="${pageContext.request.contextPath}/product/editproduct?id=${product.getId()}"
+                   onclick="return confirm('Изменить данные <${product.getName()}> категории <${product.getCategory()}>?')"><input
+                    type="submit" value="Изменить"></a></td>
         </tr>
     </c:forEach>
     <tr>
@@ -48,7 +55,7 @@
 <a href="${pageContext.request.contextPath}/selectcategorybyread">Back</a>
 <br>
 <br>
-<%@include file="../../footer.jsp"%>
+<%@include file="../../footer.jsp" %>
 <br>
 <br>
 </body>

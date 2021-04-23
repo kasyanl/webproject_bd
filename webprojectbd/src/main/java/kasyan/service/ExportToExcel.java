@@ -18,21 +18,22 @@ public class ExportToExcel {
 
     private ExportToExcel() {
     }
+
     private ProductService productService;
 
     // сервис для экспорта всего списка продуктов в excel
-    public static List<Product>exportAllList(List<Product> listProduct){
+    public static List<Product> exportAllList(List<Product> listProduct) {
         exportList(listProduct);
         return listProduct;
     }
 
     // сервис на экспорт списка продуктов одной категории в excel
-    public List<Product> exportCategoryList(String category){
+    public List<Product> exportCategoryList(String category) {
         return exportList(productService.fineCategoryForRead(category));
     }
 
     // формирование таблицы excel и добавление данных из List
-    public static List <Product> exportList(List<Product> listProduct) {
+    public static List<Product> exportList(List<Product> listProduct) {
         HSSFWorkbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("List products"); //название вкладки
         sheet.setDefaultColumnWidth(25); // высота строк
@@ -60,7 +61,7 @@ public class ExportToExcel {
 
         // добавляем данные из List
         int i = 1;
-        for(Product product : listProduct){
+        for (Product product : listProduct) {
             Row rowProduct = sheet.createRow(i);
             Cell id = rowProduct.createCell(0);
             id.setCellValue(product.getId());
@@ -95,7 +96,7 @@ public class ExportToExcel {
     }
 
     @Autowired
-    public  void setProductService(ProductService productService){
+    public void setProductService(ProductService productService) {
         this.productService = productService;
     }
 }

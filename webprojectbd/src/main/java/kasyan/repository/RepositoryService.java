@@ -11,10 +11,10 @@ import java.util.List;
 @Slf4j
 public class RepositoryService {
 
-    private static final String DRIVER="com.mysql.cj.jdbc.Driver";
-    private static final String URL="jdbc:mysql://localhost:3306/product?serverTimezone=Europe/Minsk&useSSL=false";
-    private static final String LOGIN="kasyanl";
-    private static final String PASSWORD="kasyan123";
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String URL = "jdbc:mysql://localhost:3306/product?serverTimezone=Europe/Minsk&useSSL=false";
+    private static final String LOGIN = "kasyanl";
+    private static final String PASSWORD = "kasyan123";
 
     //запрос на вывод Product данных из БД (формирование List)
     public List<Product> findProductFromBD(String sqlSelect) {

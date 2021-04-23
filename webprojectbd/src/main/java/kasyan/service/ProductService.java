@@ -36,7 +36,7 @@ public class ProductService extends RepositoryService implements InitializingBea
     }
 
     // формирование ID с одновременной проверкой (если есть пропуск (например 2, 3, ,5 то будет присвоен id=4))
-    public int createId (List<Product> newList){
+    public int createId(List<Product> newList) {
         int id = 0; // по умолчанию id = 0
         if (!newList.isEmpty()) { // если записи имеются, проверяем на пропущенные id
             SortDataBase.sortById(newList); //сортируем для корректной проверки
@@ -84,7 +84,7 @@ public class ProductService extends RepositoryService implements InitializingBea
     }
 
     //находим Product по его ID  в корзине и отправка запроса для удаления
-    public void deleteBasket(int id) {
+    public void deleteOfBasket(int id) {
         List<Product> newList = findAllDeleted();
         String select = "";
         for (Product product : newList) {
@@ -94,6 +94,11 @@ public class ProductService extends RepositoryService implements InitializingBea
             }
         }
         selectBD(select); // отправка запроса на удаление из основной БД
+    }
+
+    //находим Product по его ID  в корзине и отправка запроса для удаления
+    public void cleanBasket() {
+        selectBD("TRUNCATE TABLE productofdelete");
     }
 
     //восстанавливаем удаленный ранее Product по его ID и отправка запроса в БД
@@ -111,7 +116,7 @@ public class ProductService extends RepositoryService implements InitializingBea
     }
 
     // отправляем запрос в БД на обновление Product по ID
-    public void update(int id, String category, String name, double price, double discount){
+    public void update(int id, String category, String name, double price, double discount) {
         double actualPrice = calculating(price, discount);
         String select = "UPDATE product SET category='" + category + "', name='" + name + "', price=" + price +
                 ", discount=" + discount + ", actualPrice=" + actualPrice + " WHERE id=" + id;

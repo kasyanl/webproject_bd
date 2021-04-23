@@ -16,6 +16,7 @@ public final class SortDataBase {
         Comparator<Product> sortByName = new SortByName();
         listProduct.sort(sortByName);
     }
+
     public static void sortByNameReverse(List<Product> listProduct) {
         Comparator<Product> sortByName = new SortByNameReverse();
         listProduct.sort(sortByName);
@@ -25,6 +26,7 @@ public final class SortDataBase {
         Comparator<Product> sortByCategory = new SortByCategory();
         listProduct.sort(sortByCategory);
     }
+
     public static void sortByCategoryReverse(List<Product> listProduct) {
         Comparator<Product> sortByCategory = new SortByCategoryReverse();
         listProduct.sort(sortByCategory);
@@ -34,6 +36,7 @@ public final class SortDataBase {
         Comparator<Product> sortByPrice = new SortByPrice();
         listProduct.sort(sortByPrice);
     }
+
     public static void sortByPriceReverse(List<Product> listProduct) {
         Comparator<Product> sortByPrice = new SortByPriceReverse();
         listProduct.sort(sortByPrice);
@@ -43,6 +46,7 @@ public final class SortDataBase {
         Comparator<Product> sortByActualPrice = new SortByActualPrice();
         listProduct.sort(sortByActualPrice);
     }
+
     public static void sortByActualPriceReverse(List<Product> listProduct) {
         Comparator<Product> sortByActualPrice = new SortByActualPriceReverse();
         listProduct.sort(sortByActualPrice);
@@ -52,6 +56,7 @@ public final class SortDataBase {
         Comparator<Product> sortById = new SortByIdReverse();
         listProduct.sort(sortById);
     }
+
     public static void sortById(List<Product> listProduct) {
         Comparator<Product> sortById = new SortById();
         listProduct.sort(sortById);
@@ -61,6 +66,7 @@ public final class SortDataBase {
         Comparator<Product> sortByDiscount = new SortByDiscount();
         listProduct.sort(sortByDiscount);
     }
+
     public static void sortByDiscountReverse(List<Product> listProduct) {
         Comparator<Product> sortByDiscount = new SortByDiscountReverse();
         listProduct.sort(sortByDiscount);
@@ -73,6 +79,7 @@ public final class SortDataBase {
             return o1.getName().compareTo(o2.getName());
         }
     }
+
     static class SortByNameReverse extends Product implements Comparator<Product> {
 
         @Override
@@ -88,6 +95,7 @@ public final class SortDataBase {
             return (int) o1.getActualPrice() - (int) o2.getActualPrice();
         }
     }
+
     static class SortByActualPriceReverse implements Comparator<Product> {
 
         @Override
@@ -103,6 +111,7 @@ public final class SortDataBase {
             return o1.getCategory().compareTo(o2.getCategory());
         }
     }
+
     static class SortByCategoryReverse implements Comparator<Product> {
 
         @Override
@@ -118,11 +127,12 @@ public final class SortDataBase {
             return o1.getId() - o2.getId();
         }
     }
+
     static class SortByIdReverse implements Comparator<Product> {
 
         @Override
         public int compare(Product o1, Product o2) {
-            return o2.getId() -  o1.getId();
+            return o2.getId() - o1.getId();
         }
     }
 
@@ -133,6 +143,7 @@ public final class SortDataBase {
             return (int) o1.getPrice() - (int) o2.getPrice();
         }
     }
+
     static class SortByPriceReverse implements Comparator<Product> {
 
         @Override
@@ -148,6 +159,7 @@ public final class SortDataBase {
             return (int) o1.getDiscount() - (int) o2.getDiscount();
         }
     }
+
     static class SortByDiscountReverse implements Comparator<Product> {
 
         @Override

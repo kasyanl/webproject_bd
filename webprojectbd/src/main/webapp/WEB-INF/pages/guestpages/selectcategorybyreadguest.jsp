@@ -19,7 +19,7 @@
 </div>
 <br>
 <br>
-<a href="${pageContext.request.contextPath}/content" target="content">Back</a>
+<a href="${pageContext.request.contextPath}/contentguest" target="content">Back</a>
 <br>
 <br>
 <%@include file="../footer.jsp"%>

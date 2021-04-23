@@ -6,11 +6,14 @@
     <meta charset="UTF-8">
     <title>Система учета продуктов</title>
 </head>
-<body align="center" background="http://sensitiv-eysk.ru/wp-content/uploads/2017/06/opera-background-light-blue.jpg" bgcolor="#CCFFCC">
-<%@include file="../../header.jsp"%>
-<%@include file="../navguest.jsp"%>
+<body align="center" background="http://sensitiv-eysk.ru/wp-content/uploads/2017/06/opera-background-light-blue.jpg"
+      bgcolor="#CCFFCC">
+<%@include file="../../header.jsp" %>
+<%@include file="../navguest.jsp" %>
 <h1>Продукты категории MILK_PRODUCT:</h1>
-<h3 align="right"><a href="${pageContext.request.contextPath}/product/exportexcel/milkguest">Экспорт в Excel файл</a></h3>
+<h3 align="right"><a href="${pageContext.request.contextPath}/product/exportexcel/milkguest">
+    <input type="image" src="https://macadmins.software/icons/excel.png"
+           width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a></h3>
 <table class="table" align="center">
     <tr>
         <th width="100" align="center"><b> ID</b></th>
@@ -42,7 +45,7 @@
 <a href="${pageContext.request.contextPath}/selectcategorybyreadguest">Back</a>
 <br>
 <br>
-<%@include file="../../footer.jsp"%>
+<%@include file="../../footer.jsp" %>
 <br>
 <br>
 </body>

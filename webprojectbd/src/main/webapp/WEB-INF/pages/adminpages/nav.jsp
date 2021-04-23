@@ -3,11 +3,11 @@
 <body>
 <nav>
     <ul>
-        <a href="${pageContext.request.contextPath}/content" target="content">Главная</a> |
-        <a href="${pageContext.request.contextPath}/product/allproduct" target="content">Список всех продуктов</a> |
-       <a href="${pageContext.request.contextPath}/selectcategorybyread" target="content">Получить список одной категории</a> |
-        <a href="${pageContext.request.contextPath}/product/addproduct" target="content">Добавить новый продукт</a>|
-        <a href="${pageContext.request.contextPath}/product/alldeletedproduct" target="content">Корзина</a>|
+        <a href="${pageContext.request.contextPath}/content">Главная</a> |
+        <a href="${pageContext.request.contextPath}/product/allproduct">Список всех продуктов</a> |
+        <a href="${pageContext.request.contextPath}/selectcategorybyread">Получить список одной категории</a> |
+        <a href="${pageContext.request.contextPath}/product/addproduct">Добавить новый продукт</a>|
+        <a href="${pageContext.request.contextPath}/product/alldeletedproduct">Корзина</a>|
         <a href="${pageContext.request.contextPath}/">На стартовую страницу</a>
     </ul>
 </nav>

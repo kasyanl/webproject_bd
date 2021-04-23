@@ -27,8 +27,6 @@ public class PersonService extends RepositoryService implements InitializingBean
     }
 
     @Override
-    public void afterPropertiesSet(){
+    public void afterPropertiesSet() {
     }
 }
-
-

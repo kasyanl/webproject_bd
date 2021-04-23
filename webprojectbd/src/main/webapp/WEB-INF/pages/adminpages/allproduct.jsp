@@ -6,23 +6,26 @@
     <meta charset="UTF-8">
     <title>Система учета продуктов</title>
 </head>
-<body align="center" background="http://sensitiv-eysk.ru/wp-content/uploads/2017/06/opera-background-light-blue.jpg" bgcolor="#CCFFCC">
-<%@include file="../header.jsp"%>
-<%@include file="nav.jsp"%>
+<body align="center" background="http://sensitiv-eysk.ru/wp-content/uploads/2017/06/opera-background-light-blue.jpg"
+      bgcolor="#CCFFCC">
+<%@include file="../header.jsp" %>
+<%@include file="nav.jsp" %>
 <h1>Весь список продуктов</h1>
 
-<h3 align="right"><a href="${pageContext.request.contextPath}/exportexcel">Экспорт в Excel файл</a></h3>
+<h3 align="right"><a href="${pageContext.request.contextPath}/exportexcel">
+    <input type="image" src="https://macadmins.software/icons/excel.png"
+           width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a></h3>
 
 <table class="table" align="center">
     <tr>
-    <th colspan="2" width="100" align="center"><b> ID</b></th>
-    <th colspan="2" align="center"><b> категория</b></th>
-    <th colspan="2" align="center"><b> название</b></th>
-    <th colspan="2" width="100" align="center"><b> цена</b></th>
-    <th colspan="2" width="100" align="center"><b> скидка</b></th>
-    <th colspan="2"width="100" align="center"><b> конечная цена</b></th>
-    <td></td>
-    <td></td>
+        <th colspan="2" width="100" align="center"><b> ID</b></th>
+        <th colspan="2" align="center"><b> категория</b></th>
+        <th colspan="2" align="center"><b> название</b></th>
+        <th colspan="2" width="100" align="center"><b> цена</b></th>
+        <th colspan="2" width="100" align="center"><b> скидка</b></th>
+        <th colspan="2" width="100" align="center"><b> конечная цена</b></th>
+        <td></td>
+        <td></td>
     </tr>
     <tr>
         <th><a href="${pageContext.request.contextPath}/product/sortbyid">&#x21D1; </a></th>
@@ -46,9 +49,14 @@
             <td colspan="2" align="center"><c:out value="${product.getPrice()}"/></td>
             <td colspan="2" align="center"><c:out value="${product.getDiscount()}"/></td>
             <td colspan="2" align="center"><c:out value="${product.getActualPrice()}"/></td>
-            <td colspan="2" align="center"><a href="${pageContext.request.contextPath}/product/deleteproduct?id=${product.getId()}">Удалить</a></td>
-            <td colspan="2" align="center"><a href="${pageContext.request.contextPath}/product/editproduct?id=${product.getId()}">Изменить</a></td>
+            <td><a href="${pageContext.request.contextPath}/product/deleteproduct?id=${product.getId()}"
+                   onclick="return confirm('Удалить продукт <${product.getName()}> категории <${product.getCategory()}>?')"><input
+                    type="submit" value="Удалить"></a></td>
+            <td><a href="${pageContext.request.contextPath}/product/editproduct?id=${product.getId()}"
+                   onclick="return confirm('Изменить данные <${product.getName()}> категории <${product.getCategory()}>?')"><input
+                    type="submit" value="Изменить"></a></td>
         </tr>
+
     </c:forEach>
     <tr>
         <th colspan="2" width="100" align="center"><b> ID</b></th>
@@ -56,7 +64,7 @@
         <th colspan="2" align="center"><b> название</b></th>
         <th colspan="2" width="100" align="center"><b> цена</b></th>
         <th colspan="2" width="100" align="center"><b> скидка</b></th>
-        <th colspan="2"width="100" align="center"><b> конечная цена</b></th>
+        <th colspan="2" width="100" align="center"><b> конечная цена</b></th>
         <td></td>
         <td></td>
     </tr>
@@ -64,6 +72,8 @@
 <a href="${pageContext.request.contextPath}/content">Back</a>
 <br>
 <br>
-<%@include file="../footer.jsp"%>
+<%@include file="../footer.jsp" %>
+<br>
+<br>
 </body>
 </html>

@@ -10,10 +10,27 @@
       bgcolor="#CCFFCC">
 <%@include file="../header.jsp" %>
 <%@include file="nav.jsp" %>
+
+<table class="table" align="right">
+    <tr>
+        <th>
+            <a href="${pageContext.request.contextPath}/product/cleanbascket"
+               onclick="return confirm('Вы точно хотите очистить корзину? Данные будут уберяны без возможности восстановления')">
+                <input type="image" src="https://im0-tub-ru.yandex.net/i?id=5f8c305dd3c5eff594bf8166946853ee&ref=rim&n=33&w=150&h=150"
+                       width="100" height="100" alt="Очистить корзину" value="Очистить корзину"></a></th>
+        </th>
+        <th>
+            <a href="${pageContext.request.contextPath}/exportexceldel">
+            <input type="image" src="https://macadmins.software/icons/excel.png"
+                   width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a></th>
+    </tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h1>Весь список удаленных ранее продуктов</h1>
-
-<h3 align="right"><a href="${pageContext.request.contextPath}/exportexceldel">Экспорт в Excel файл</a></h3>
-
 <table class="table" align="center">
     <tr>
         <th width="100" align="center"><b> ID</b></th>
@@ -35,9 +52,12 @@
             <td align="center"><c:out value="${product.getDiscount()}"/></td>
             <td align="center"><c:out value="${product.getActualPrice()}"/></td>
             <td align="center"><c:out value="${product.getData()}"/></td>
-            <td align="center"><a href="${pageContext.request.contextPath}/product/recoveredproduct?id=${product.getId()}">Восстановить</a>
-            <td align="center"><a href="${pageContext.request.contextPath}/product/deleteproductbasket?id=${product.getId()}">Удалить из корзины</a></td>
-            </td>
+            <td><a href="${pageContext.request.contextPath}/product/recoveredproduct?id=${product.getId()}"
+                   onclick="return confirm('Восстановить продукт <${product.getName()}> категории <${product.getCategory()}>?')">
+                <input type="submit" value="Восстановить"></a></td>
+            <td><a href="${pageContext.request.contextPath}/product/deleteproductbasket?id=${product.getId()}"
+                   onclick="return confirm('Вы уверены? Продукт <${product.getName()}> категории <${product.getCategory()}> будет удален без возможности восстановления!')">
+                <input type="submit" value="Удалить из корзины"></a></td>
         </tr>
     </c:forEach>
 </table>

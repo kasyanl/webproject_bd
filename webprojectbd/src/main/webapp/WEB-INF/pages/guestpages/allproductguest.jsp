@@ -11,7 +11,9 @@
 <%@include file="navguest.jsp"%>
 <h1>Весь список продуктов</h1>
 
-<h3 align="right"><a href="${pageContext.request.contextPath}/exportexcelguest">Экспорт в Excel файл</a></h3>
+<h3 align="right"><a href="${pageContext.request.contextPath}/exportexcelguest">
+    <input type="image" src="https://macadmins.software/icons/excel.png"
+           width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a></h3>
 
 <table class="table" align="center">
     <tr>

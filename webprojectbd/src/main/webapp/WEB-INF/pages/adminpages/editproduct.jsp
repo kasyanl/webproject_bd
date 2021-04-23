@@ -11,7 +11,8 @@
 <% Product product = (Product) request.getAttribute("product"); %>
 <form action="${pageContext.request.contextPath}/product/editproduct?id=<%=product.getId()%>" method="post">
     <label>
-        категория<select <%=product.getCategory()%> name="category">
+        категория<br>
+        <select <%=product.getCategory()%> name="category">
             <option value="<%=product.getCategory()%>"><%=product.getCategory()%></option>
             <option value="FRUITS">FRUITS</option>
             <option value="BERRIES">BERRIES</option>
@@ -21,12 +22,18 @@
             <option value="ALCOHOLIC_BEVERAGES">ALCOHOLIC_BEVERAGES</option>
         </select>
     </label><br/>
-    название продукта<label><input name="name" placeholder="название" type="text" value="<%=product.getName()%>"></label> <br/>
-    стоимость подукта, BYN<label><input name="price" placeholder="цена" type="text" value="<%=product.getPrice()%>"></label> <br/>
-    скидкапродукта, %<label><input name="discount" placeholder="скидка" type="text" value="<%=product.getDiscount()%>"></label> <br/>
-    <input type="submit" value="Сохранить изменения">
+    название продукта<br>
+    <label><input name="name" placeholder="название" type="text" value="<%=product.getName()%>"></label> <br/>
+    стоимость подукта, BYN<br>
+    <label><input name="price" placeholder="цена" type="text" value="<%=product.getPrice()%>"></label> <br/>
+    скидка продукта, %<br>
+    <label><input name="discount" placeholder="скидка" type="text" value="<%=product.getDiscount()%>"></label> <br/>
+    <br>  <input type="image" src="https://localmarketing.university/wp-content/uploads/2016/09/save-file_z1uSqULO_L.jpg"
+                 width="50" height="50" alt="Добавить новый продукт" value="Сохранить">
+    <br><b>Сохранить</b>
 </form>
 <a href="${pageContext.request.contextPath}/content">Home</a>
+<br>
 <br>
 <br>
 <%@include file="../footer.jsp"%>

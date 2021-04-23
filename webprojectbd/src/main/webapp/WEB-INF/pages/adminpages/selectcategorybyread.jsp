@@ -7,6 +7,7 @@
 </head>
 <body align="center" background="http://sensitiv-eysk.ru/wp-content/uploads/2017/06/opera-background-light-blue.jpg" bgcolor="#CCFFCC">
 <%@include file="../header.jsp"%>
+<%@include file="nav.jsp" %>
 <h1>Выберите категориию:</h1>
 <div face="arial" size="+1">
     <li><a href="${pageContext.request.contextPath}/product/finefruits" target="content">FRUITS</a>
