@@ -5,7 +5,7 @@ CREATE TABLE product
     name        VARCHAR(255)     NOT NULL,
     price       DOUBLE DEFAULT 0 NOT NULL,
     discount    DOUBLE DEFAULT 0 NOT NULL,
-    actualPrice DOUBLE           NOT NULL
+    actualPrice DOUBLE DEFAULT 0 NOT NULL
 );
 
 CREATE TABLE person
@@ -22,6 +22,6 @@ CREATE TABLE productOfDelete
     name        VARCHAR(255)     NOT NULL,
     price       DOUBLE DEFAULT 0 NOT NULL,
     discount    DOUBLE DEFAULT 0 NOT NULL,
-    actualPrice DOUBLE           NOT NULL,
+    actualPrice DOUBLE DEFAULT 0 NOT NULL,
     data        DATETIME         NOT NULL
 )

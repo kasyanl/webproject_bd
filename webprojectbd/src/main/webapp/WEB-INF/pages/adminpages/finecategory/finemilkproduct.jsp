@@ -10,9 +10,26 @@
 <%@include file="../../header.jsp"%>
 <%@include file="../nav.jsp"%>
 <h1>Продукты категории MILK_PRODUCT:</h1>
-<h3 align="right"><a href="${pageContext.request.contextPath}/product/exportexcel/milk">
-    <input type="image" src="https://macadmins.software/icons/excel.png"
-           width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a></h3>
+<table class="title" align="right">
+    <tr>
+        <th>
+            <a href="${pageContext.request.contextPath}/product/milkproductdiscount" title="Изменить скидку для категории">
+                <input type="image" src="https://togo.ru/images/catalogue/logo/025c2a065edeb3940dad15e0cdf9a988.png"
+                       width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a>
+        </th>
+        <th>
+            <a href="${pageContext.request.contextPath}/product/exportexcel/milk" title="Экспорт в Excel файл">
+                <input type="image" src="https://macadmins.software/icons/excel.png"
+                       width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a>
+        </th>
+    </tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <table class="table" align="center">
     <tr>
         <th width="100" align="center"><b> ID</b></th>
@@ -54,7 +71,7 @@
 <a href="${pageContext.request.contextPath}/selectcategorybyread">Back</a>
 <br>
 <br>
-<%@include file="../../footer.jsp"%>
+<%@include file="../../footer.jsp" %>
 <br>
 <br>
 </body>

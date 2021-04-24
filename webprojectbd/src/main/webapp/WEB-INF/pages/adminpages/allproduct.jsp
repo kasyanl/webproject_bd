@@ -49,9 +49,10 @@
             <td colspan="2" align="center"><c:out value="${product.getPrice()}"/></td>
             <td colspan="2" align="center"><c:out value="${product.getDiscount()}"/></td>
             <td colspan="2" align="center"><c:out value="${product.getActualPrice()}"/></td>
-            <td><a href="${pageContext.request.contextPath}/product/deleteproduct?id=${product.getId()}"
+            <td><a href="${pageContext.request.contextPath}/product/deleteproduct?id=${product.getId()}" title="Удалить"
                    onclick="return confirm('Удалить продукт <${product.getName()}> категории <${product.getCategory()}>?')"><input
-                    type="submit" value="Удалить"></a></td>
+                    type="image" src="https://svgsilh.com/svg/1294426.svg"
+                    width="20" height="20" alt="Очистить корзину"></a></td>
             <td><a href="${pageContext.request.contextPath}/product/editproduct?id=${product.getId()}"
                    onclick="return confirm('Изменить данные <${product.getName()}> категории <${product.getCategory()}>?')"><input
                     type="submit" value="Изменить"></a></td>

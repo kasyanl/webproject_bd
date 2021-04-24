@@ -1,7 +1,6 @@
 package kasyan.controller;
 
 import kasyan.exceptions.ProductNotFoundException;
-import kasyan.service.ExportToExcel;
 import kasyan.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -78,6 +77,13 @@ public class ProductCrudOperationController {
     public String cleanBascket() {
         productService.cleanBasket();
         return "adminpages/cleanbascket";
+    }
+
+    // очистка корзины
+    @GetMapping(value = "/recoveredallproduct")
+    public String recoveredAllProduct() {
+        productService.recoveryAllProduct();
+        return "adminpages/recoveredallproduct";
     }
 
     // получение страницы с сообщением, что продукт восстановлен

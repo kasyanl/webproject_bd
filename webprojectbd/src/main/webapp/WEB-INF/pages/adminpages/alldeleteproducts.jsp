@@ -14,13 +14,19 @@
 <table class="table" align="right">
     <tr>
         <th>
-            <a href="${pageContext.request.contextPath}/product/cleanbascket"
-               onclick="return confirm('Вы точно хотите очистить корзину? Данные будут уберяны без возможности восстановления')">
-                <input type="image" src="https://im0-tub-ru.yandex.net/i?id=5f8c305dd3c5eff594bf8166946853ee&ref=rim&n=33&w=150&h=150"
+            <a href="${pageContext.request.contextPath}/product/recoveredallproduct" title="Восстановить все данные"
+               onclick="return confirm('Восстановить все данные из корзины?')">
+                <input type="image" src="https://mancompany-spb.ru/files/comforttable-2.png"
                        width="100" height="100" alt="Очистить корзину" value="Очистить корзину"></a></th>
         </th>
         <th>
-            <a href="${pageContext.request.contextPath}/exportexceldel">
+            <a href="${pageContext.request.contextPath}/product/cleanbascket" title="Очистить корзину"
+               onclick="return confirm('Вы точно хотите очистить корзину? Данные будут уберяны без возможности восстановления!')">
+                <input type="image" src="https://svgsilh.com/svg/1294426.svg"
+                       width="100" height="100" alt="Очистить корзину" value="Очистить корзину"></a></th>
+        </th>
+        <th>
+            <a href="${pageContext.request.contextPath}/exportexceldel" title="Экспортировать в excel">
             <input type="image" src="https://macadmins.software/icons/excel.png"
                    width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a></th>
     </tr>

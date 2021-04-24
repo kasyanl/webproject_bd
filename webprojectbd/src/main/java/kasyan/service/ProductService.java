@@ -101,6 +101,15 @@ public class ProductService extends RepositoryService implements InitializingBea
         selectBD("TRUNCATE TABLE productofdelete");
     }
 
+    // восстановление всех записей из корзины
+    public void recoveryAllProduct() {
+        List<Product> newList = findAllDeleted();
+        for (Product product : newList) {
+            save(product.getCategory(), product.getName(), product.getPrice(), product.getDiscount());
+        }
+        cleanBasket();
+    }
+
     //восстанавливаем удаленный ранее Product по его ID и отправка запроса в БД
     public void recovered(int id) {
         List<Product> newList = findAllDeleted();
@@ -121,6 +130,14 @@ public class ProductService extends RepositoryService implements InitializingBea
         String select = "UPDATE product SET category='" + category + "', name='" + name + "', price=" + price +
                 ", discount=" + discount + ", actualPrice=" + actualPrice + " WHERE id=" + id;
         selectBD(select);
+    }
+
+    // установка скидки для одной категории
+    public void updateDiscountForCategory(String category, double discount) {
+        List<Product> listCategory = fineCategoryForRead(category);
+        for (Product product : listCategory) {
+            update(product.getId(), category, product.getName(), product.getPrice(), discount);
+        }
     }
 
     // ищем все Products одной категории и отправляем в БД соответствующий запрос
@@ -177,6 +194,8 @@ public class ProductService extends RepositoryService implements InitializingBea
             case 12:
                 SortDataBase.sortByActualPriceReverse(listProduct);
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + sort);
         }
         return listProduct;
     }
