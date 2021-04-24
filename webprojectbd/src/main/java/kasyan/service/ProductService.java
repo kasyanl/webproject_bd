@@ -1,5 +1,6 @@
 package kasyan.service;
 
+import kasyan.bean.Person;
 import kasyan.exceptions.ProductNotFoundException;
 import kasyan.repository.RepositoryService;
 import kasyan.bean.Product;
@@ -14,14 +15,20 @@ public class ProductService extends RepositoryService implements InitializingBea
 
     //отправка запроса на получение всех продуктов из основной БД
     public List<Product> findAll() {
-        String select = "SELECT id, category, name, price, discount, actualPrice FROM product";
+        String select = "SELECT id, category, name, price, discount, ROUND (actualPrice, 2) AS actualPrice FROM product";
         return findProductFromBD(select);
     }
 
     //отправка запроса на получение всех ранее удаленных продуктов из основной БД
     public List<Product> findAllDeleted() {
-        String select = "SELECT id, category, name, price, discount, actualPrice, data FROM productofdelete";
+        String select = "SELECT id, category, name, price, discount, data, ROUND (actualPrice, 2) AS actualPrice FROM productofdelete";
         return findDeleteProductFromBD(select);
+    }
+
+    public boolean basketIsEmpty() {
+        List<Product> newList = findAllDeleted();
+        if (newList.isEmpty()) return true;
+        return false;
     }
 
     /* отправка запроса на добавление новой записи в БД Product

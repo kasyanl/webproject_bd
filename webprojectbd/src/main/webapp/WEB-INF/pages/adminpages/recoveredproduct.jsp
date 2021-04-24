@@ -12,7 +12,7 @@
 <form action="${pageContext.request.contextPath}/product/allproduct?id=${product.getId()}" method="get">
     <input type="submit" value="Список продуктов">
 </form>
-<form action="${pageContext.request.contextPath}/product/alldeletedproduct" method="get">
+<form action="${pageContext.request.contextPath}/product/bascket" method="get">
     <input type="submit" value="В корзину">
 </form>
 <%@include file="../footer.jsp"%>

@@ -1,5 +1,6 @@
 package kasyan.controller;
 
+import kasyan.bean.Product;
 import kasyan.exceptions.ProductNotFoundException;
 import kasyan.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,20 @@ public class ProductCrudOperationController {
     }
 
     // получение всего списка продуктов из корзины
+    @GetMapping(value = "/bascket")
+    public ModelAndView bascket() {
+        if(!productService.basketIsEmpty()) {
+            return new ModelAndView("redirect:/product/alldeletedproduct");
+        }
+        return new ModelAndView("adminpages/bascketempty");
+    }
+
+    // получение страницы с формой для добавления продукта
+    @GetMapping(value = "/bascketempty")
+    public String bascketEmpty() {
+        return "adminpages/bascketempty";
+    }
+
     @GetMapping(value = "/alldeletedproduct")
     public ModelAndView findAllDeletedProduct() {
         ModelAndView modelAndView = new ModelAndView();
@@ -79,7 +94,7 @@ public class ProductCrudOperationController {
         return "adminpages/cleanbascket";
     }
 
-    // очистка корзины
+    // восстановление всех данных из корзины
     @GetMapping(value = "/recoveredallproduct")
     public String recoveredAllProduct() {
         productService.recoveryAllProduct();

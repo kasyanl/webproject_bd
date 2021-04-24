@@ -49,12 +49,14 @@
             <td><c:out value="${product.getPrice()}"/></td>
             <td><c:out value="${product.getDiscount()}"/></td>
             <td><c:out value="${product.getActualPrice()}"/></td>
-            <td><a href="${pageContext.request.contextPath}/product/deleteproduct?id=${product.getId()}"
+            <td><a href="${pageContext.request.contextPath}/product/deleteproduct?id=${product.getId()}" title="Удалить"
                    onclick="return confirm('Удалить продукт <${product.getName()}> категории <${product.getCategory()}>?')"><input
-                    type="submit" value="Удалить"></a></td>
-            <td><a href="${pageContext.request.contextPath}/product/editproduct?id=${product.getId()}"
+                    type="image" src="https://svgsilh.com/svg/1294426.svg"
+                    width="18" height="18" alt="Очистить корзину"></a></td>
+            <td><a href="${pageContext.request.contextPath}/product/editproduct?id=${product.getId()}" title="Изменить"
                    onclick="return confirm('Изменить данные <${product.getName()}> категории <${product.getCategory()}>?')"><input
-                    type="submit" value="Изменить"></a></td>
+                    type="image" src=" https://img2.freepng.ru/20190207/ecf/kisspng-computer-icons-scalable-vector-graphics-portable-n-evaluate-svg-png-icon-free-download-353985-on-5c5cfc0bd4b6c6.5938487915495977078713.jpg"
+                    width="18" height="18" alt="Очистить корзину"></a></td>
         </tr>
     </c:forEach>
     <tr>
