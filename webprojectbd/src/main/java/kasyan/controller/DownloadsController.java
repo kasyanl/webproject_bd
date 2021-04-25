@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-//Контроллер для скачивания файла
+//Контроллер для скачивания файла и подгрузки изображений
 
 @RequestMapping("/download")
 @Controller
