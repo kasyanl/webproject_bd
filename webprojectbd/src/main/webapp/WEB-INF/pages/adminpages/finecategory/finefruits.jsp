@@ -14,12 +14,12 @@
 <table class="title" align="right">
     <tr>
         <th>
-            <a href="${pageContext.request.contextPath}/product/alcoholdiscount" title="Изменить скидку для категории">
+            <a href="${pageContext.request.contextPath}/product/fruitsdiscount" title="Изменить скидку для категории">
                 <input type="image" src="${pageContext.request.contextPath}/download/xls/procent.png"
                        width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a>
         </th>
         <th>
-            <a href="${pageContext.request.contextPath}/product/exportexcel/alcohol" title="Экспорт в Excel файл">
+            <a href="${pageContext.request.contextPath}/product/exportexcel/fruits" title="Экспорт в Excel файл">
                 <input type="image" src="${pageContext.request.contextPath}/download/xls/excel.png"
                        width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a>
         </th>

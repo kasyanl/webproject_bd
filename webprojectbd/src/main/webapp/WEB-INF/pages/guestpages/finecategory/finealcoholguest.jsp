@@ -12,7 +12,7 @@
 <h1>Продукты категории ALCOHOLIC_BEVERAGES:</h1>
 <h3 align="right"><a href="${pageContext.request.contextPath}/product/exportexcel/alcoholguest">
     <input type="image" src="${pageContext.request.contextPath}/download/xls/excel.png"
-           width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a>
+           width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a></h3>
 <table class="table" align="center">
     <tr>
         <th width="100" align="center"><b> ID</b></th>
@@ -41,6 +41,7 @@
         <th><b> конечная цена</b></th>
     </tr>
 </table>
+    <br>
 <a href="${pageContext.request.contextPath}/selectcategorybyreadguest">Back</a>
 <br>
 <br>

@@ -29,7 +29,7 @@ public class ExportToExcel {
     }
 
     // сервис на экспорт списка продуктов одной категории в excel
-    public List<Product> exportCategoryList(String category) throws IOException, SQLException {
+    public List<Product> exportCategoryList(String category) throws SQLException {
         return exportList(productService.fineCategoryForRead(category));
     }
 

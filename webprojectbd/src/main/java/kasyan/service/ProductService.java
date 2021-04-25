@@ -5,7 +5,6 @@ import kasyan.repository.RepositoryService;
 import kasyan.bean.Product;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class ProductService extends RepositoryService{
     public boolean basketIsEmpty() throws SQLException {
         List<Product> newList = findAllDeleted();
         if (newList.isEmpty()) return true;
-        return false;
+        else return false;
     }
 
     /* отправка запроса на добавление новой записи в БД Product

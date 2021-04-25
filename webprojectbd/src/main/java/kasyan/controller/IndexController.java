@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
 @Controller
@@ -19,7 +17,7 @@ public class IndexController {
     private ProductService productService;
 
     //получение стартовой страницы
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public String index() {
         return "index";
     }
@@ -59,7 +57,7 @@ public class IndexController {
 
     // экспорт данных  в excel основной БД для юзера
     @GetMapping(value = "/exportexcel")
-    public ModelAndView exportExcel() throws IOException, SQLException {
+    public ModelAndView exportExcel() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexcel");
         modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAll()));
@@ -68,7 +66,7 @@ public class IndexController {
 
     // экспорт данных  в excel основной БД для гостя
     @GetMapping(value = "/exportexcelguest")
-    public ModelAndView exportExcelGuest() throws IOException, SQLException {
+    public ModelAndView exportExcelGuest() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/exportexcelguest");
         modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAll()));

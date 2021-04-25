@@ -18,7 +18,7 @@ public class ExportToExcelController {
 
     // получение списка категории ALCOHOLIC_BEVERAGES
     @GetMapping(value = "/exportexcel/alcohol")
-    public ModelAndView exportExcelAlcohol() throws IOException, SQLException {
+    public ModelAndView exportExcelAlcohol() throws SQLException, IOException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexcel/alcohol");
         modelAndView.addObject("product", exportToExcel.exportCategoryList("ALCOHOLIC_BEVERAGES"));
