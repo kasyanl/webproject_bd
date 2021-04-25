@@ -6,8 +6,7 @@
     <meta charset="UTF-8">
     <title>Корзина</title>
 </head>
-<body align="center" background="http://sensitiv-eysk.ru/wp-content/uploads/2017/06/opera-background-light-blue.jpg"
-      bgcolor="#CCFFCC">
+<body align="center" background="${pageContext.request.contextPath}/download/xls/bg.jpg" bgcolor="#CCFFCC">
 <%@include file="../header.jsp" %>
 <%@include file="nav.jsp" %>
 
@@ -16,18 +15,18 @@
         <th>
             <a href="${pageContext.request.contextPath}/product/recoveredallproduct" title="Восстановить все данные"
                onclick="return confirm('Восстановить все данные из корзины?')">
-                <input type="image" src="https://mancompany-spb.ru/files/comforttable-2.png"
+                <input type="image" src="${pageContext.request.contextPath}/download/xls/recovery.png"
                        width="100" height="100" alt="Очистить корзину" value="Очистить корзину"></a></th>
         </th>
         <th>
             <a href="${pageContext.request.contextPath}/product/cleanbascket" title="Очистить корзину"
                onclick="return confirm('Вы точно хотите очистить корзину? Данные будут уберяны без возможности восстановления!')">
-                <input type="image" src="https://svgsilh.com/svg/1294426.svg"
+                <input type="image" src="${pageContext.request.contextPath}/download/xls/del.png"
                        width="100" height="100" alt="Очистить корзину" value="Очистить корзину"></a></th>
         </th>
         <th>
             <a href="${pageContext.request.contextPath}/exportexceldel" title="Экспортировать в excel">
-            <input type="image" src="https://macadmins.software/icons/excel.png"
+            <input type="image" src="${pageContext.request.contextPath}/download/xls/excel.png"
                    width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a></th>
     </tr>
 </table>

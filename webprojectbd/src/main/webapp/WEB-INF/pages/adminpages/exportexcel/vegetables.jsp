@@ -10,12 +10,12 @@
 <head>
     <title>Title</title>
 </head>
-<body align="center" background="http://sensitiv-eysk.ru/wp-content/uploads/2017/06/opera-background-light-blue.jpg" bgcolor="#CCFFCC">
+<body align="center" background="${pageContext.request.contextPath}/download/xls/bg.jpg" bgcolor="#CCFFCC">
 <%@include file="../../header.jsp"%>
 <%@include file="../nav.jsp"%>
 <h3>Список список категории <b>VEGETABLES</b> успешно сформирован. Нажмите на значок, для скачивания</h3>
 <a href="${pageContext.request.contextPath}/download/xls/productlist.xls" title="Сохранить">
-    <input type="image" src="https://macadmins.software/icons/excel.png"
+    <input type="image" src="${pageContext.request.contextPath}/download/xls/excel.png"
            width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a>
 <br>
 <br>

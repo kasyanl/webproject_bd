@@ -4,27 +4,37 @@ import kasyan.bean.Person;
 import kasyan.bean.Product;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 @Slf4j
 public class RepositoryService {
 
-    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/product?serverTimezone=Europe/Minsk&useSSL=false";
-    private static final String LOGIN = "kasyanl";
-    private static final String PASSWORD = "kasyan123";
+// подключение к БД
+    private Connection getConnection(){
+        Properties properties = new Properties();
+        Connection conn = null;
+        try (InputStream in = new FileInputStream("src/main/resources/application.properties")){
+            properties.load(in);
+            Class.forName(properties.getProperty("DRIVER"));
+            conn = DriverManager.getConnection(properties.getProperty("URL"),
+                    properties.getProperty("LOGIN"), properties.getProperty("PASSWORD"));
+        } catch (IOException | ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return conn;
+    }
 
     //запрос на вывод Product данных из БД (формирование List)
-    public List<Product> findProductFromBD(String sqlSelect) {
+    public List<Product> findProductFromBD(String sqlSelect) throws SQLException {
         List<Product> productList = new ArrayList<>();
-        Connection conn = null;
-        Statement statement = null;
-        try {
-            Class.forName(DRIVER);
-            conn = DriverManager.getConnection(URL, LOGIN, PASSWORD);
-            statement = conn.createStatement();
+        Connection conn = getConnection();
+        Statement statement = conn.createStatement();
 
             ResultSet rs = statement.executeQuery(sqlSelect);
 
@@ -43,65 +53,28 @@ public class RepositoryService {
             rs.close();
             statement.close();
             conn.close();
-        } catch (Exception se) {
-            se.printStackTrace();
-        } finally {
-            try {
-                if (statement != null)
-                    statement.close();
-            } catch (SQLException ignored) {
-            }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
+
         return productList;
     }
 
     //запрос на изменение (удаление, добавлене, обновление) Product в БД
-    public void selectBD(String sqlSelect) {
-
-        Connection conn = null;
-        Statement statement = null;
-        try {
-            Class.forName(DRIVER);
-            conn = DriverManager.getConnection(URL, LOGIN, PASSWORD);
-            statement = conn.createStatement();
+    public void selectBD(String sqlSelect) throws SQLException {
+        Connection conn = getConnection();
+        Statement statement = conn.createStatement();
 
             int rs = statement.executeUpdate(sqlSelect);
             log.info("Product is {}", rs);
 
             statement.close();
             conn.close();
-        } catch (Exception se) {
-            se.printStackTrace();
-        } finally {
-            try {
-                if (statement != null)
-                    statement.close();
-            } catch (SQLException ignored) {
-            }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
     }
 
     //запрос на вывод Product данных из корзины (формирование List)
-    public List<Product> findDeleteProductFromBD(String sqlSelect) {
+    public List<Product> findDeleteProductFromBD(String sqlSelect) throws SQLException {
+
         List<Product> productListDel = new ArrayList<>();
-        Connection conn = null;
-        Statement statement = null;
-        try {
-            Class.forName(DRIVER);
-            conn = DriverManager.getConnection(URL, LOGIN, PASSWORD);
-            statement = conn.createStatement();
+        Connection conn = getConnection();
+        Statement statement = conn.createStatement();
 
             ResultSet rs = statement.executeQuery(sqlSelect);
 
@@ -120,33 +93,16 @@ public class RepositoryService {
             rs.close();
             statement.close();
             conn.close();
-        } catch (Exception se) {
-            se.printStackTrace();
-        } finally {
-            try {
-                if (statement != null)
-                    statement.close();
-            } catch (SQLException ignored) {
-            }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
+
         return productListDel;
     }
 
     //запрос на получение Person данных из БД (формирование List)
-    public List<Person> findPersonFromBD(String sqlSelect) {
+    public List<Person> findPersonFromBD(String sqlSelect) throws SQLException {
+
         List<Person> personList = new ArrayList<>();
-        Connection conn = null;
-        Statement statement = null;
-        try {
-            Class.forName(DRIVER);
-            conn = DriverManager.getConnection(URL, LOGIN, PASSWORD);
-            statement = conn.createStatement();
+        Connection conn = getConnection();
+        Statement statement = conn.createStatement();
 
             ResultSet rs = statement.executeQuery(sqlSelect);
 
@@ -161,21 +117,7 @@ public class RepositoryService {
             rs.close();
             statement.close();
             conn.close();
-        } catch (Exception se) {
-            se.printStackTrace();
-        } finally {
-            try {
-                if (statement != null)
-                    statement.close();
-            } catch (SQLException ignored) {
-            }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
+
         return personList;
     }
 }

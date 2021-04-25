@@ -5,15 +5,15 @@
 <head>
     <title>Учет продуктов</title>
 </head>
-<body align="center" background="http://sensitiv-eysk.ru/wp-content/uploads/2017/06/opera-background-light-blue.jpg" bgcolor="#CCFFCC">
+<body align="center" background="${pageContext.request.contextPath}/download/xls/bg.jpg" bgcolor="#CCFFCC">
 <%@include file="../../header.jsp"%>
 <%@include file="../navguest.jsp"%>
 <h1>Весь список продуктов</h1>
 <br>
 <h3>сортировка по цене с учетом скидки</h3>
 <h3 align="right"><a href="${pageContext.request.contextPath}/exportexcelguest">
-    <input type="image" src="https://macadmins.software/icons/excel.png"
-           width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a></h3>
+    <input type="image" src="${pageContext.request.contextPath}/download/xls/excel.png"
+           width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a>
 <br>
 <table class="table" align="center">
     <tr>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Система учета продуктов</title>
 </head>
-<body align="center" background="http://sensitiv-eysk.ru/wp-content/uploads/2017/06/opera-background-light-blue.jpg" bgcolor="#CCFFCC">
+<body align="center" background="${pageContext.request.contextPath}/download/xls/bg.jpg" bgcolor="#CCFFCC">
 <%@include file="../header.jsp"%>
 <%@include file="navguest.jsp"%>
 <h1>Выберите категориию:</h1>
@@ -19,7 +19,7 @@
 </div>
 <br>
 <br>
-<a href="${pageContext.request.contextPath}/contentguest" target="content">Back</a>
+<a href="${pageContext.request.contextPath}/contentguest">Back</a>
 <br>
 <br>
 <%@include file="../footer.jsp"%>

@@ -1,31 +1,31 @@
 package kasyan.service;
 
-import kasyan.bean.Person;
 import kasyan.exceptions.ProductNotFoundException;
 import kasyan.repository.RepositoryService;
 import kasyan.bean.Product;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ProductService extends RepositoryService implements InitializingBean {
+public class ProductService extends RepositoryService{
 
     //отправка запроса на получение всех продуктов из основной БД
-    public List<Product> findAll() {
+    public List<Product> findAll() throws SQLException {
         String select = "SELECT id, category, name, price, discount, ROUND (actualPrice, 2) AS actualPrice FROM product";
         return findProductFromBD(select);
     }
 
     //отправка запроса на получение всех ранее удаленных продуктов из основной БД
-    public List<Product> findAllDeleted() {
+    public List<Product> findAllDeleted() throws SQLException {
         String select = "SELECT id, category, name, price, discount, data, ROUND (actualPrice, 2) AS actualPrice FROM productofdelete";
         return findDeleteProductFromBD(select);
     }
 
-    public boolean basketIsEmpty() {
+    public boolean basketIsEmpty() throws SQLException {
         List<Product> newList = findAllDeleted();
         if (newList.isEmpty()) return true;
         return false;
@@ -33,7 +33,7 @@ public class ProductService extends RepositoryService implements InitializingBea
 
     /* отправка запроса на добавление новой записи в БД Product
     и автоматическим расчетом цены с учетом скидки */
-    public void save(String category, String name, double price, double discount) {
+    public void save(String category, String name, double price, double discount) throws SQLException {
         List<Product> newList = findAll();
         int id = createId(newList);
         double actualPrice = calculating(price, discount);
@@ -62,7 +62,7 @@ public class ProductService extends RepositoryService implements InitializingBea
     }
 
     //находим конкретный Product по ID
-    public Product findById(int id) throws ProductNotFoundException {
+    public Product findById(int id) throws ProductNotFoundException, SQLException {
         List<Product> newList = findAll();
         for (Product product : newList) {
             if (product.getId() == id) {
@@ -73,7 +73,7 @@ public class ProductService extends RepositoryService implements InitializingBea
     }
 
     //находим Product по его ID и отправка запроса в БД для удаления и одновременно добавления в "корзину" (и добавляем дату удаления)
-    public void delete(int id) {
+    public void delete(int id) throws SQLException {
         List<Product> newList = findAll();
         String select = "";
         String deleteProduct = "";
@@ -91,7 +91,7 @@ public class ProductService extends RepositoryService implements InitializingBea
     }
 
     //находим Product по его ID  в корзине и отправка запроса для удаления
-    public void deleteOfBasket(int id) {
+    public void deleteOfBasket(int id) throws SQLException {
         List<Product> newList = findAllDeleted();
         String select = "";
         for (Product product : newList) {
@@ -104,12 +104,12 @@ public class ProductService extends RepositoryService implements InitializingBea
     }
 
     //находим Product по его ID  в корзине и отправка запроса для удаления
-    public void cleanBasket() {
+    public void cleanBasket() throws SQLException {
         selectBD("TRUNCATE TABLE productofdelete");
     }
 
     // восстановление всех записей из корзины
-    public void recoveryAllProduct() {
+    public void recoveryAllProduct() throws SQLException {
         List<Product> newList = findAllDeleted();
         for (Product product : newList) {
             save(product.getCategory(), product.getName(), product.getPrice(), product.getDiscount());
@@ -118,7 +118,7 @@ public class ProductService extends RepositoryService implements InitializingBea
     }
 
     //восстанавливаем удаленный ранее Product по его ID и отправка запроса в БД
-    public void recovered(int id) {
+    public void recovered(int id) throws SQLException {
         List<Product> newList = findAllDeleted();
         String selectDel = "";
         for (Product product : newList) {
@@ -132,7 +132,7 @@ public class ProductService extends RepositoryService implements InitializingBea
     }
 
     // отправляем запрос в БД на обновление Product по ID
-    public void update(int id, String category, String name, double price, double discount) {
+    public void update(int id, String category, String name, double price, double discount) throws SQLException {
         double actualPrice = calculating(price, discount);
         String select = "UPDATE product SET category='" + category + "', name='" + name + "', price=" + price +
                 ", discount=" + discount + ", actualPrice=" + actualPrice + " WHERE id=" + id;
@@ -140,7 +140,7 @@ public class ProductService extends RepositoryService implements InitializingBea
     }
 
     // установка скидки для одной категории
-    public void updateDiscountForCategory(String category, double discount) {
+    public void updateDiscountForCategory(String category, double discount) throws SQLException {
         List<Product> listCategory = fineCategoryForRead(category);
         for (Product product : listCategory) {
             update(product.getId(), category, product.getName(), product.getPrice(), discount);
@@ -148,7 +148,7 @@ public class ProductService extends RepositoryService implements InitializingBea
     }
 
     // ищем все Products одной категории и отправляем в БД соответствующий запрос
-    public List<Product> fineCategoryForRead(String category) {
+    public List<Product> fineCategoryForRead(String category) throws SQLException {
         List<Product> listProduct = findAll();
         List<Product> newListForRead = new ArrayList<>();
         for (Product product : listProduct) {
@@ -162,7 +162,7 @@ public class ProductService extends RepositoryService implements InitializingBea
     }
 
     // сортировка списка Products по категориям, в т.ч. и реверсивно
-    public List<Product> sortList(int sort) {
+    public List<Product> sortList(int sort) throws SQLException {
         List<Product> listProduct = findAll();
         switch (sort) {
             case 1:
@@ -205,9 +205,5 @@ public class ProductService extends RepositoryService implements InitializingBea
                 throw new IllegalStateException("Unexpected value: " + sort);
         }
         return listProduct;
-    }
-
-    @Override
-    public void afterPropertiesSet() {
     }
 }

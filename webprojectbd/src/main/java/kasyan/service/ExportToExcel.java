@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -28,7 +29,7 @@ public class ExportToExcel {
     }
 
     // сервис на экспорт списка продуктов одной категории в excel
-    public List<Product> exportCategoryList(String category) {
+    public List<Product> exportCategoryList(String category) throws IOException, SQLException {
         return exportList(productService.fineCategoryForRead(category));
     }
 

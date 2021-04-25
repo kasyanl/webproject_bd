@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 @Controller
 @RequestMapping(value = "/")
 public class IndexController {
@@ -47,7 +50,7 @@ public class IndexController {
 
     // экспорт данных из корзины в excel
     @GetMapping(value = "/exportexceldel")
-    public ModelAndView exportExcelDel() {
+    public ModelAndView exportExcelDel() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexceldel");
         modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAllDeleted()));
@@ -56,7 +59,7 @@ public class IndexController {
 
     // экспорт данных  в excel основной БД для юзера
     @GetMapping(value = "/exportexcel")
-    public ModelAndView exportExcel() {
+    public ModelAndView exportExcel() throws IOException, SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexcel");
         modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAll()));
@@ -65,7 +68,7 @@ public class IndexController {
 
     // экспорт данных  в excel основной БД для гостя
     @GetMapping(value = "/exportexcelguest")
-    public ModelAndView exportExcelGuest() {
+    public ModelAndView exportExcelGuest() throws IOException, SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/exportexcelguest");
         modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAll()));

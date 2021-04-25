@@ -6,14 +6,13 @@
     <meta charset="UTF-8">
     <title>Система учета продуктов</title>
 </head>
-<body align="center" background="http://sensitiv-eysk.ru/wp-content/uploads/2017/06/opera-background-light-blue.jpg"
-      bgcolor="#CCFFCC">
+<body align="center" background="${pageContext.request.contextPath}/download/xls/bg.jpg" bgcolor="#CCFFCC">
 <%@include file="../header.jsp" %>
 <%@include file="nav.jsp" %>
 <h1>Весь список продуктов</h1>
 
 <h3 align="right"><a href="${pageContext.request.contextPath}/exportexcel" title="Экспортировать в excel">
-    <input type="image" src="https://macadmins.software/icons/excel.png"
+    <input type="image" src="${pageContext.request.contextPath}/download/xls/excel.png"
            width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a></h3>
 
 <table class="table" align="center">
@@ -51,11 +50,11 @@
             <td colspan="2" align="center"><c:out value="${product.getActualPrice()}"/></td>
             <td><a href="${pageContext.request.contextPath}/product/deleteproduct?id=${product.getId()}" title="Удалить"
                    onclick="return confirm('Удалить продукт <${product.getName()}> категории <${product.getCategory()}>?')"><input
-                    type="image" src="https://svgsilh.com/svg/1294426.svg"
+                    type="image" src="${pageContext.request.contextPath}/download/xls/del.png"
                     width="18" height="18" alt="Очистить корзину"></a></td>
             <td><a href="${pageContext.request.contextPath}/product/editproduct?id=${product.getId()}" title="Изменить"
                    onclick="return confirm('Изменить данные <${product.getName()}> категории <${product.getCategory()}>?')"><input
-                    type="image" src=" https://img2.freepng.ru/20190207/ecf/kisspng-computer-icons-scalable-vector-graphics-portable-n-evaluate-svg-png-icon-free-download-353985-on-5c5cfc0bd4b6c6.5938487915495977078713.jpg"
+                    type="image" src="${pageContext.request.contextPath}/download/xls/edit.jpg"
                     width="18" height="18" alt="Очистить корзину"></a></td>
         </tr>
     </c:forEach>

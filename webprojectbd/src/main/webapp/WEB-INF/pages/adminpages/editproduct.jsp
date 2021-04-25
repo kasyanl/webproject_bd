@@ -4,7 +4,7 @@
 <head>
     <title>Изменение данных.</title>
 </head>
-<body align="center" background="http://sensitiv-eysk.ru/wp-content/uploads/2017/06/opera-background-light-blue.jpg" bgcolor="#CCFFCC">
+<body align="center" background="${pageContext.request.contextPath}/download/xls/bg.jpg" bgcolor="#CCFFCC">
 <%@include file="../header.jsp"%>
 <%@include file="nav.jsp"%>
 <h2>Замените необходимые данные:</h2>
@@ -28,9 +28,8 @@
     <label><input name="price" placeholder="цена" type="text" value="<%=product.getPrice()%>"></label> <br/>
     скидка продукта, %<br>
     <label><input name="discount" placeholder="скидка" type="text" value="<%=product.getDiscount()%>"></label> <br/>
-    <br>  <input type="image" src="https://localmarketing.university/wp-content/uploads/2016/09/save-file_z1uSqULO_L.jpg"
+    <br>  <input type="image" src="${pageContext.request.contextPath}/download/xls/save.jpg"
                  width="50" height="50" alt="Добавить новый продукт" value="Сохранить">
-    <br><b>Сохранить</b>
 </form>
 <a href="${pageContext.request.contextPath}/content">Home</a>
 <br>

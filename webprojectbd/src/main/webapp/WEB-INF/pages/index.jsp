@@ -3,7 +3,7 @@
 <head>
     <title>Добро пожаловать</title>
 </head>
-<body align="center" background="http://sensitiv-eysk.ru/wp-content/uploads/2017/06/opera-background-light-blue.jpg" bgcolor="#CCFFCC">
+<body align="center" background="${pageContext.request.contextPath}/download/xls/bg.jpg" bgcolor="#CCFFCC">
 <%@include file="header.jsp" %>
 <h2>Добро пожаловать в Систему учета продуктов.
     <br>Для работы с базой данных введите логи и пароль, либо войдите как гость (доступна возможность только просмотра)
