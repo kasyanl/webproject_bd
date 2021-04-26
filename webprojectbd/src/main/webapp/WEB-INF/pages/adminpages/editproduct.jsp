@@ -28,6 +28,8 @@
     <label><input name="price" placeholder="цена" type="text" value="<%=product.getPrice()%>"></label> <br/>
     скидка продукта, %<br>
     <label><input name="discount" placeholder="скидка" type="text" value="<%=product.getDiscount()%>"></label> <br/>
+    наличе, кг(шт)<br>
+    <label><input name="totalVolume" placeholder="наличие" type="text" value="<%=product.getTotalVolume()%>"></label> <br/>
     <br>  <input type="image" src="${pageContext.request.contextPath}/download/xls/save.jpg"
                  width="50" height="50" alt="Добавить новый продукт" value="Сохранить">
 </form>

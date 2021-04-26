@@ -46,8 +46,9 @@ public class ProductCrudOperationController {
     public ModelAndView add(@RequestParam(value = "category") String category,
                             @RequestParam(value = "name") String name,
                             @RequestParam(value = "price") double price,
-                            @RequestParam(value = "discount") double discount) throws SQLException {
-        productService.save(category, name, price, discount);
+                            @RequestParam(value = "discount") double discount,
+                            @RequestParam(value = "totalVolume") double totalVolume) throws SQLException {
+        productService.save(category, name, price, discount, totalVolume);
         return new ModelAndView("redirect:/product/allproduct");
     }
 
@@ -123,8 +124,9 @@ public class ProductCrudOperationController {
                              @RequestParam(value = "category") String category,
                              @RequestParam(value = "name") String name,
                              @RequestParam(value = "price") double price,
-                             @RequestParam(value = "discount") double discount) throws SQLException {
-        productService.update(id, category, name, price, discount);
+                             @RequestParam(value = "discount") double discount,
+                             @RequestParam(value = "totalVolume") double totalVolume) throws SQLException {
+        productService.update(id, category, name, price, discount, totalVolume);
         return new ModelAndView("redirect:/product/allproduct");
     }
 

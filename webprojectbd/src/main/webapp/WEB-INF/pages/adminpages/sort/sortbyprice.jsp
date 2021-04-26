@@ -18,11 +18,12 @@
 <table class="table" align="center">
     <tr>
         <th colspan="2" width="100" align="center"><b> ID</b></th>
-        <th colspan="2" align="center"><b> категории</b></th>
-        <th colspan="2" align="center"><b> названию</b></th>
-        <th colspan="2" width="100" align="center"><b> цене</b></th>
-        <th colspan="2" width="100" align="center"><b> скидке</b></th>
-        <th colspan="2"width="100" align="center"><b> конечной цене</b></th>
+        <th colspan="2" align="center"><b> категория</b></th>
+        <th colspan="2" align="center"><b> название</b></th>
+        <th colspan="2" width="100" align="center"><b> цена, BYN</b></th>
+        <th colspan="2" width="100" align="center"><b> скидка, %</b></th>
+        <th colspan="2" width="100" align="center"><b> конечная цена, BYN</b></th>
+        <th colspan="2" width="100" align="center"><b> наличие, кг(шт)</b></th>
         <td></td>
         <td></td>
     </tr>
@@ -39,6 +40,8 @@
         <th><a href="${pageContext.request.contextPath}/product/sortbydiscountreverse">&#x21D3; </a></th>
         <th><a href="${pageContext.request.contextPath}/product/sortbyactualprice">&#x21D1; </a></th>
         <th><a href="${pageContext.request.contextPath}/product/sortbyactualpricereverse">&#x21D3; </a></th>
+        <th><a href="${pageContext.request.contextPath}/product/sortbytotalvolume">&#x21D1; </a></th>
+        <th><a href="${pageContext.request.contextPath}/product/sortbytotalvolumereverse">&#x21D3; </a></th>
 
     </tr>
     <c:forEach var="product" items="${product}">
@@ -49,6 +52,7 @@
             <td colspan="2" align="center"><c:out value="${product.getPrice()}"/></td>
             <td colspan="2" align="center"><c:out value="${product.getDiscount()}"/></td>
             <td colspan="2" align="center"><c:out value="${product.getActualPrice()}"/></td>
+            <td colspan="2" align="center"><c:out value="${product.getTotalVolume()}"/></td>
             <td><a href="${pageContext.request.contextPath}/product/deleteproduct?id=${product.getId()}" title="Удалить"
                    onclick="return confirm('Удалить продукт <${product.getName()}> категории <${product.getCategory()}>?')"><input
                     type="image" src="${pageContext.request.contextPath}/download/xls/del.png"
@@ -61,11 +65,12 @@
     </c:forEach>
     <tr>
         <th colspan="2" width="100" align="center"><b> ID</b></th>
-        <th colspan="2" align="center"><b> категории</b></th>
-        <th colspan="2" align="center"><b> названию</b></th>
-        <th colspan="2" width="100" align="center"><b> цене</b></th>
-        <th colspan="2" width="100" align="center"><b> скидке</b></th>
-        <th colspan="2"width="100" align="center"><b> конечной цене</b></th>
+        <th colspan="2" align="center"><b> категория</b></th>
+        <th colspan="2" align="center"><b> название</b></th>
+        <th colspan="2" width="100" align="center"><b> цена, BYN</b></th>
+        <th colspan="2" width="100" align="center"><b> скидка, %</b></th>
+        <th colspan="2" width="100" align="center"><b> конечная цена, BYN</b></th>
+        <th colspan="2" width="100" align="center"><b> наличие, кг(шт)</b></th>
         <td></td>
         <td></td>
     </tr>
@@ -74,7 +79,7 @@
 <a href="${pageContext.request.contextPath}/content">Back</a>
 <br>
 <br>
-<%@include file="../../footer.jsp"%>
+<%@include file="../../footer.jsp" %>
 <br>
 <br>
 </body>

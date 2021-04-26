@@ -8,6 +8,7 @@
         <a href="${pageContext.request.contextPath}/selectcategorybyread">Получить список одной категории</a> |
         <a href="${pageContext.request.contextPath}/product/addproduct">Добавить новый продукт</a>|
         <a href="${pageContext.request.contextPath}/product/bascket">Корзина</a>|
+        <a href="${pageContext.request.contextPath}/product/buystarted">Касса</a>|
         <a href="${pageContext.request.contextPath}/">На стартовую страницу</a>
     </ul>
 </nav>

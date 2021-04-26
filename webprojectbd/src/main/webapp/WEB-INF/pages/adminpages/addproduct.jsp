@@ -23,6 +23,7 @@
     <label><input name="name" placeholder="Название" type="text"></label><br/>
     <label><input name="price" placeholder="цена, BYN" type="text"></label> <br/>
     <label><input name="discount" placeholder="Скидка, %" type="text"></label> <br/>
+    <label><input name="totalVolume" placeholder="Наличие, кг(шт)" type="text"></label> <br/>
     <br> <input type="image" src="${pageContext.request.contextPath}/download/xls/save.jpg"
                 width="50" height="50" alt="Добавить новый продукт" value="Сохранить">
 </form>

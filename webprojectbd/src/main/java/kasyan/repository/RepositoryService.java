@@ -16,7 +16,7 @@ import java.util.Properties;
 public class RepositoryService {
 
 // подключение к БД
-    private Connection getConnection(){
+    private static Connection getConnection(){
         Properties properties = new Properties();
         Connection conn = null;
         try (InputStream in = new FileInputStream("src/main/resources/application.properties")){
@@ -47,8 +47,9 @@ public class RepositoryService {
                 double price = rs.getDouble("price");
                 double discount = rs.getDouble("discount");
                 double actualPrice = rs.getDouble("actualPrice");
+                double totalVolume = rs.getDouble("totalVolume");
 
-                productList.add(new Product(id, category, name, price, discount, actualPrice));
+                productList.add(new Product(id, category, name, price, discount, actualPrice, totalVolume));
             }
             rs.close();
             statement.close();
@@ -69,6 +70,17 @@ public class RepositoryService {
             conn.close();
     }
 
+    //запрос на изменение (удаление, добавлене, обновление) Product в БД
+    public void select(String sqlSelect) throws SQLException {
+        Connection conn = getConnection();
+        Statement statement = conn.createStatement();
+
+        ResultSet rs = statement.executeQuery(sqlSelect);
+
+        rs.close();
+        statement.close();
+        conn.close();
+    }
     //запрос на вывод Product данных из корзины (формирование List)
     public List<Product> findDeleteProductFromBD(String sqlSelect) throws SQLException {
 
@@ -86,9 +98,10 @@ public class RepositoryService {
                 double price = rs.getDouble("price");
                 double discount = rs.getDouble("discount");
                 double actualPrice = rs.getDouble("actualPrice");
+                double totalVolume = rs.getDouble("totalVolume");
                 String data = rs.getString("data");
 
-                productListDel.add(new Product(id, category, name, price, discount, actualPrice, data));
+                productListDel.add(new Product(id, category, name, price, discount, actualPrice, totalVolume, data));
             }
             rs.close();
             statement.close();
@@ -119,5 +132,30 @@ public class RepositoryService {
             conn.close();
 
         return personList;
+    }
+    //запрос на вывод Product данных из корзины (формирование List)
+    public static List<Product> findBuyProductFromBD(String sqlSelect) throws SQLException {
+
+        List<Product> productListDel = new ArrayList<>();
+        Connection conn = getConnection();
+        Statement statement = conn.createStatement();
+
+        ResultSet rs = statement.executeQuery(sqlSelect);
+
+        while (rs.next()) {
+
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            double actualPrice = rs.getDouble("actualPrice");
+            double quantity = rs.getDouble("quantity");
+            double totalPrice = rs.getDouble("totalPrice");
+
+            productListDel.add(new Product(id, name, actualPrice, totalPrice, quantity));
+        }
+        rs.close();
+        statement.close();
+        conn.close();
+
+        return productListDel;
     }
 }

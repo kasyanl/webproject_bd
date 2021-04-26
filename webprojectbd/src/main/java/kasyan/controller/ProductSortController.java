@@ -125,6 +125,24 @@ public class ProductSortController {
         return modelAndView;
     }
 
+    // сортировка списка по наличию (от меньшего к большему)
+    @GetMapping(value = "/sortbytotalvolume")
+    public ModelAndView sortByTotalVolume() throws SQLException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("adminpages/sort/sortbytotalvolume");
+        modelAndView.addObject("product", productService.sortList(13));
+        return modelAndView;
+    }
+
+    // сортировка списка по наличию (от большего к меньшему)
+    @GetMapping(value = "/sortbytotalvolumereverse")
+    public ModelAndView sortByTotalVolumeReverse() throws SQLException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("adminpages/sort/sortbytotalvolumereverse");
+        modelAndView.addObject("product", productService.sortList(14));
+        return modelAndView;
+    }
+
     // сортировка списка по ID (от меньшего к большему) для Гостя
     @GetMapping(value = "/sortbyidguest")
     public ModelAndView sortByIdGuest() throws SQLException {
@@ -230,6 +248,24 @@ public class ProductSortController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/sort/sortbyactualpricereverseguest");
         modelAndView.addObject("product", productService.sortList(12));
+        return modelAndView;
+    }
+
+    // сортировка списка по наличию (от меньшего к большему)
+    @GetMapping(value = "/sortbytotalvolumeguest")
+    public ModelAndView sortByTotalVolumeGuest() throws SQLException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("guestpages/sort/sortbytotalvolumeguest");
+        modelAndView.addObject("product", productService.sortList(13));
+        return modelAndView;
+    }
+
+    // сортировка списка по наличию (от большего к меньшему)
+    @GetMapping(value = "/sortbytotalvolumereverseguest")
+    public ModelAndView sortByTotalVolumeReverseGuest() throws SQLException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("guestpages/sort/sortbytotalvolumereverseguest");
+        modelAndView.addObject("product", productService.sortList(14));
         return modelAndView;
     }
 

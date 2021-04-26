@@ -39,14 +39,15 @@
 <table class="table" align="center">
     <tr>
         <th width="100" align="center"><b> ID</b></th>
-        <th align="center"><b> категория</b></th>
-        <th align="center"><b> название</b></th>
-        <th width="100" align="center"><b> цена</b></th>
-        <th width="100" align="center"><b> скидка</b></th>
-        <th width="100" align="center"><b> конечная цена</b></th>
+        <th><b> категория</b></th>
+        <th><b> название</b></th>
+        <th width="100" align="center"><b> цена, BYN</b></th>
+        <th width="100" align="center"><b> скидка, %</b></th>
+        <th width="100" align="center"><b> конечная цена, BYN</b></th>
+        <th width="100" align="center"><b> наличие, кг(шт)</b></th>
         <th align="center"><b> дата удаления</b></th>
-        <td></td>
-        <td></td>
+        <th></th>
+        <th></th>
     </tr>
     <c:forEach var="product" items="${product}">
         <tr>
@@ -56,6 +57,7 @@
             <td align="center"><c:out value="${product.getPrice()}"/></td>
             <td align="center"><c:out value="${product.getDiscount()}"/></td>
             <td align="center"><c:out value="${product.getActualPrice()}"/></td>
+            <td align="center"><c:out value="${product.getTotalVolume()}"/></td>
             <td align="center"><c:out value="${product.getData()}"/></td>
             <td><a href="${pageContext.request.contextPath}/product/recoveredproduct?id=${product.getId()}"
                    onclick="return confirm('Восстановить продукт <${product.getName()}> категории <${product.getCategory()}>?')">

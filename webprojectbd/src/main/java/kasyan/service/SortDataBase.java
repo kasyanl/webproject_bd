@@ -72,6 +72,16 @@ public final class SortDataBase {
         listProduct.sort(sortByDiscount);
     }
 
+    public static void sortByTotalVolume(List<Product> listProduct) {
+        Comparator<Product> sortByTotalVolume = new SortByTotalVolume();
+        listProduct.sort(sortByTotalVolume);
+    }
+
+    public static void sortByTotalVolumeReverse(List<Product> listProduct) {
+        Comparator<Product> sortByTotalVolume = new SortByTotalVolumeReverse();
+        listProduct.sort(sortByTotalVolume);
+    }
+
     static class SortByName extends Product implements Comparator<Product> {
 
         @Override
@@ -165,6 +175,21 @@ public final class SortDataBase {
         @Override
         public int compare(Product o1, Product o2) {
             return (int) o2.getDiscount() - (int) o1.getDiscount();
+        }
+    }
+    static class SortByTotalVolume implements Comparator<Product> {
+
+        @Override
+        public int compare(Product o1, Product o2) {
+            return (int) o1.getTotalVolume() - (int) o2.getTotalVolume();
+        }
+    }
+
+    static class SortByTotalVolumeReverse implements Comparator<Product> {
+
+        @Override
+        public int compare(Product o1, Product o2) {
+            return (int) o2.getTotalVolume() - (int) o1.getTotalVolume();
         }
     }
 }

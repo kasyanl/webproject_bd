@@ -5,6 +5,7 @@ CREATE TABLE product
     name        VARCHAR(255)     NOT NULL,
     price       DOUBLE DEFAULT 0 NOT NULL,
     discount    DOUBLE DEFAULT 0 NOT NULL,
+    totalVolume DOUBLE DEFAULT 0 NOT NULL,
     actualPrice DOUBLE DEFAULT 0 NOT NULL
 );
 
@@ -23,5 +24,15 @@ CREATE TABLE productOfDelete
     price       DOUBLE DEFAULT 0 NOT NULL,
     discount    DOUBLE DEFAULT 0 NOT NULL,
     actualPrice DOUBLE DEFAULT 0 NOT NULL,
+    totalVolume DOUBLE DEFAULT 0 NOT NULL,
     data        DATETIME         NOT NULL
+);
+
+CREATE TABLE buyproduct
+(
+    id          INTEGER primary key auto_increment,
+    name        VARCHAR(255)     NOT NULL,
+    actualPrice DOUBLE DEFAULT 0 NOT NULL,
+    quantity    DOUBLE DEFAULT 0 NOT NULL,
+    totalPrice  DOUBLE DEFAULT 0 NOT NULL
 )

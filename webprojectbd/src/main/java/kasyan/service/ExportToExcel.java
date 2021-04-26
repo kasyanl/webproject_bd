@@ -57,8 +57,11 @@ public class ExportToExcel {
         Cell discountTop = row.createCell(4);
         discountTop.setCellValue("Discount, %");// название пятого столбца
 
-        Cell actualPriceTop = row.createCell(5);
-        actualPriceTop.setCellValue("Actual price, BYN");// название шестого столбца
+        Cell totalVolumeTop = row.createCell(5);
+        totalVolumeTop.setCellValue("Count, kg()");// название пятого столбца
+
+        Cell actualPriceTop = row.createCell(6);
+        actualPriceTop.setCellValue("Total, BYN");// название шестого столбца
 
         // добавляем данные из List
         int i = 1;
@@ -79,13 +82,81 @@ public class ExportToExcel {
             Cell discount = rowProduct.createCell(4);
             discount.setCellValue(product.getDiscount());
 
-            Cell actualPrice = rowProduct.createCell(5);
+            Cell totalVolume = rowProduct.createCell(5);
+            totalVolume.setCellValue(product.getTotalVolume());
+
+            Cell actualPrice = rowProduct.createCell(6);
             actualPrice.setCellValue(product.getActualPrice());
 
             i++;
         }
         // название и путь для нашего файла (по умолчанию в корне проекта)
         String filename = "src/main/webapp/WEB-INF/downloads/xls/productlist.xls";
+
+        try (FileOutputStream out = new FileOutputStream(filename)) {
+            workbook.write(out);
+            File file = new File(filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listProduct;
+    }
+
+    // формирование таблицы excel и добавление данных из List
+    public List<Product> check(List<Product> listProduct) throws SQLException {
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        Sheet sheet = workbook.createSheet("check"); //название вкладки
+        sheet.setDefaultColumnWidth(25); // высота строк
+
+        // даем название колонок таблицы
+        Row row = sheet.createRow(0); // первая строка
+
+        Cell idTop = row.createCell(0);
+        idTop.setCellValue("id"); // название первого столбца
+
+        Cell nameTop = row.createCell(1);
+        nameTop.setCellValue("Name");
+
+        Cell actualPriceTop = row.createCell(2);
+        actualPriceTop.setCellValue("Price, BYN");// название шестого столбца
+
+        Cell quantityTop = row.createCell(3);
+        quantityTop.setCellValue("Count");// название пятого столбца
+
+        Cell totalPriceTop = row.createCell(4);
+        totalPriceTop.setCellValue("Total, BYN");// название шестого столбца
+
+        // добавляем данные из List
+        int i = 1;
+        for (Product product : listProduct) {
+            Row rowProduct = sheet.createRow(i);
+            Cell id = rowProduct.createCell(0);
+            id.setCellValue(product.getId());
+
+            Cell name = rowProduct.createCell(1);
+            name.setCellValue(product.getName());
+
+            Cell actualPrice = rowProduct.createCell(2);
+            actualPrice.setCellValue(product.getActualPrice());
+
+            Cell quantity = rowProduct.createCell(3);
+            quantity.setCellValue(product.getQuantity());
+
+            Cell totalPrice = rowProduct.createCell(4);
+            totalPrice.setCellValue(product.getActualPrice());
+
+            i++;
+        }
+        Row rowProduct = sheet.createRow(i);
+
+        Cell quantity = rowProduct.createCell(3);
+        quantity.setCellValue("TOTAL:");
+
+        Cell totalPrice = rowProduct.createCell(4);
+        totalPrice.setCellValue(productService.totalPrise());
+
+        // название и путь для нашего файла (по умолчанию в корне проекта)
+        String filename = "src/main/webapp/WEB-INF/downloads/xls/check.xls";
 
         try (FileOutputStream out = new FileOutputStream(filename)) {
             workbook.write(out);

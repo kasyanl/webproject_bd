@@ -20,14 +20,15 @@
         <th colspan="2" width="100" align="center"><b> ID</b></th>
         <th colspan="2" align="center"><b> категория</b></th>
         <th colspan="2" align="center"><b> название</b></th>
-        <th colspan="2" width="100" align="center"><b> цена</b></th>
-        <th colspan="2" width="100" align="center"><b> скидка</b></th>
-        <th colspan="2" width="100" align="center"><b> конечная цена</b></th>
+        <th colspan="2" width="100" align="center"><b> цена, BYN</b></th>
+        <th colspan="2" width="100" align="center"><b> скидка, %</b></th>
+        <th colspan="2" width="100" align="center"><b> конечная цена, BYN</b></th>
+        <th colspan="2" width="100" align="center"><b> наличие, кг(шт)</b></th>
         <td></td>
         <td></td>
     </tr>
     <tr>
-        <th><a href="${pageContext.request.contextPath}/product/sortbyid">&#x21D1; </a></th>
+        <th><a href="${pageContext.request.contextPath}/product/sortbyid"> &#x21D1; </a></th>
         <th><a href="${pageContext.request.contextPath}/product/sortbyidreverse">&#x21D3; </a></th>
         <th><a href="${pageContext.request.contextPath}/product/sortbycategory">&#x21D1; </a></th>
         <th><a href="${pageContext.request.contextPath}/product/sortbycategoryreverse">&#x21D3; </a></th>
@@ -39,6 +40,9 @@
         <th><a href="${pageContext.request.contextPath}/product/sortbydiscountreverse">&#x21D3; </a></th>
         <th><a href="${pageContext.request.contextPath}/product/sortbyactualprice">&#x21D1; </a></th>
         <th><a href="${pageContext.request.contextPath}/product/sortbyactualpricereverse">&#x21D3; </a></th>
+        <th><a href="${pageContext.request.contextPath}/product/sortbytotalvolume">&#x21D1; </a></th>
+        <th><a href="${pageContext.request.contextPath}/product/sortbytotalvolumereverse">&#x21D3; </a></th>
+
     </tr>
     <c:forEach var="product" items="${product}">
         <tr>
@@ -48,6 +52,7 @@
             <td colspan="2" align="center"><c:out value="${product.getPrice()}"/></td>
             <td colspan="2" align="center"><c:out value="${product.getDiscount()}"/></td>
             <td colspan="2" align="center"><c:out value="${product.getActualPrice()}"/></td>
+            <td colspan="2" align="center"><c:out value="${product.getTotalVolume()}"/></td>
             <td><a href="${pageContext.request.contextPath}/product/deleteproduct?id=${product.getId()}" title="Удалить"
                    onclick="return confirm('Удалить продукт <${product.getName()}> категории <${product.getCategory()}>?')"><input
                     type="image" src="${pageContext.request.contextPath}/download/xls/del.png"
@@ -62,13 +67,15 @@
         <th colspan="2" width="100" align="center"><b> ID</b></th>
         <th colspan="2" align="center"><b> категория</b></th>
         <th colspan="2" align="center"><b> название</b></th>
-        <th colspan="2" width="100" align="center"><b> цена</b></th>
-        <th colspan="2" width="100" align="center"><b> скидка</b></th>
-        <th colspan="2" width="100" align="center"><b> конечная цена</b></th>
+        <th colspan="2" width="100" align="center"><b> цена, BYN</b></th>
+        <th colspan="2" width="100" align="center"><b> скидка, %</b></th>
+        <th colspan="2" width="100" align="center"><b> конечная цена, BYN</b></th>
+        <th colspan="2" width="100" align="center"><b> наличие, кг(шт)</b></th>
         <td></td>
         <td></td>
     </tr>
 </table>
+
 <a href="${pageContext.request.contextPath}/content">Back</a>
 <br>
 <br>

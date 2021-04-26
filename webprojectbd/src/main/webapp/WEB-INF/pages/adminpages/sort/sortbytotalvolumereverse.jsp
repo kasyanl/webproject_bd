@@ -10,7 +10,7 @@
 <%@include file="../nav.jsp"%>
 <h1>Весь список продуктов</h1>
 <br>
-<h3>сортировка по установленной скидке</h3>
+<h3>сортировка по наличию</h3>
 <h3 align="right"><a href="${pageContext.request.contextPath}/exportexcel">
     <input type="image" src="https://macadmins.software/icons/excel.png"
            width="100" height="100" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a></h3>

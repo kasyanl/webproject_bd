@@ -17,12 +17,13 @@
 
 <table class="table" align="center">
     <tr>
-    <th colspan="2" width="100" align="center"><b> ID</b></th>
-    <th colspan="2" align="center"><b> категория</b></th>
-    <th colspan="2" align="center"><b> название</b></th>
-    <th colspan="2" width="100" align="center"><b> цена</b></th>
-    <th colspan="2" width="100" align="center"><b> скидка</b></th>
-    <th colspan="2"width="100" align="center"><b> конечная цена</b></th>
+        <th colspan="2" width="100" align="center"><b> ID</b></th>
+        <th colspan="2" align="center"><b> категория</b></th>
+        <th colspan="2" align="center"><b> название</b></th>
+        <th colspan="2" width="100" align="center"><b> цена, BYN</b></th>
+        <th colspan="2" width="100" align="center"><b> скидка, %</b></th>
+        <th colspan="2" width="100" align="center"><b> конечная цена, BYN</b></th>
+        <th colspan="2" width="100" align="center"><b> наличие, кг(шт)</b></th>
     </tr>
     <tr>
         <th><a href="${pageContext.request.contextPath}/product/sortbyidguest"> &#x21D1; </a></th>
@@ -37,6 +38,8 @@
         <th><a href="${pageContext.request.contextPath}/product/sortbydiscountreverseguest">&#x21D3; </a></th>
         <th><a href="${pageContext.request.contextPath}/product/sortbyactualpriceguest">&#x21D1; </a></th>
         <th><a href="${pageContext.request.contextPath}/product/sortbyactualpricereverseguest">&#x21D3; </a></th>
+        <th><a href="${pageContext.request.contextPath}/product/sortbytotalvolumeguest">&#x21D1; </a></th>
+        <th><a href="${pageContext.request.contextPath}/product/sortbytotalvolumereverseguest">&#x21D3; </a></th>
     </tr>
     <c:forEach var="product" items="${product}">
         <tr>
@@ -46,17 +49,20 @@
             <td colspan="2" align="center"><c:out value="${product.getPrice()}"/></td>
             <td colspan="2" align="center"><c:out value="${product.getDiscount()}"/></td>
             <td colspan="2" align="center"><c:out value="${product.getActualPrice()}"/></td>
+            <td colspan="2" align="center"><c:out value="${product.getTotalVolume()}"/></td>
         </tr>
     </c:forEach>
     <tr>
         <th colspan="2" width="100" align="center"><b> ID</b></th>
         <th colspan="2" align="center"><b> категория</b></th>
         <th colspan="2" align="center"><b> название</b></th>
-        <th colspan="2" width="100" align="center"><b> цена</b></th>
-        <th colspan="2" width="100" align="center"><b> скидка</b></th>
-        <th colspan="2"width="100" align="center"><b> конечная цена</b></th>
+        <th colspan="2" width="100" align="center"><b> цена, BYN</b></th>
+        <th colspan="2" width="100" align="center"><b> скидка, %</b></th>
+        <th colspan="2" width="100" align="center"><b> конечная цена, BYN</b></th>
+        <th colspan="2" width="100" align="center"><b> наличие, кг(шт)</b></th>
     </tr>
 </table>
+
 <a href="${pageContext.request.contextPath}/contentguest">Back</a>
 <br>
 <br>
