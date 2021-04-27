@@ -8,19 +8,15 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 @Service
-public class ExportToExcel {
+public class ExportToExcelService {
 
-    private ExportToExcel() {
-    }
-
-    private ProductService productService;
+    private GetProductService getProductService;
 
     // сервис для экспорта всего списка продуктов в excel
     public static List<Product> exportAllList(List<Product> listProduct) {
@@ -30,15 +26,20 @@ public class ExportToExcel {
 
     // сервис на экспорт списка продуктов одной категории в excel
     public List<Product> exportCategoryList(String category) throws SQLException {
-        return exportList(productService.fineCategoryForRead(category));
+        return exportList(getProductService.fineCategoryForRead(category));
     }
 
     // формирование таблицы excel и добавление данных из List
     public static List<Product> exportList(List<Product> listProduct) {
         HSSFWorkbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("List products"); //название вкладки
-        sheet.setDefaultColumnWidth(25); // высота строк
-
+        sheet.setColumnWidth(0, 1500); // ширина строк
+        sheet.setColumnWidth(1,6000);
+        sheet.setColumnWidth(2,6000);
+        sheet.setColumnWidth(3,3000);
+        sheet.setColumnWidth(4,3000);
+        sheet.setColumnWidth(5,3000);
+        sheet.setColumnWidth(6,3000);
         // даем название колонок таблицы
         Row row = sheet.createRow(0); // первая строка
 
@@ -58,10 +59,10 @@ public class ExportToExcel {
         discountTop.setCellValue("Discount, %");// название пятого столбца
 
         Cell totalVolumeTop = row.createCell(5);
-        totalVolumeTop.setCellValue("Count, kg()");// название пятого столбца
+        totalVolumeTop.setCellValue("Count, kg()");// название шестого столбца
 
         Cell actualPriceTop = row.createCell(6);
-        actualPriceTop.setCellValue("Total, BYN");// название шестого столбца
+        actualPriceTop.setCellValue("Total, BYN");// название седьмого столбца
 
         // добавляем данные из List
         int i = 1;
@@ -90,29 +91,32 @@ public class ExportToExcel {
 
             i++;
         }
-        // название и путь для нашего файла (по умолчанию в корне проекта)
+        // название и путь для нашего файла
         String filename = "src/main/webapp/WEB-INF/downloads/xls/productlist.xls";
 
         try (FileOutputStream out = new FileOutputStream(filename)) {
             workbook.write(out);
-            File file = new File(filename);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException file) {
+            file.printStackTrace();
         }
         return listProduct;
     }
 
-    // формирование таблицы excel и добавление данных из List
-    public List<Product> check(List<Product> listProduct) throws SQLException {
+    // формирование таблицы excel из списка покупок
+    public void check(List<Product> listProduct) throws SQLException {
         HSSFWorkbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("check"); //название вкладки
-        sheet.setDefaultColumnWidth(25); // высота строк
+        sheet.setColumnWidth(0, 2000); // ширина строк
+        sheet.setColumnWidth(1,5000);
+        sheet.setColumnWidth(2,3000);
+        sheet.setColumnWidth(3,4000);
+        sheet.setColumnWidth(4,4000);
 
         // даем название колонок таблицы
         Row row = sheet.createRow(0); // первая строка
 
         Cell idTop = row.createCell(0);
-        idTop.setCellValue("id"); // название первого столбца
+        idTop.setCellValue("#"); // название первого столбца
 
         Cell nameTop = row.createCell(1);
         nameTop.setCellValue("Name");
@@ -131,7 +135,7 @@ public class ExportToExcel {
         for (Product product : listProduct) {
             Row rowProduct = sheet.createRow(i);
             Cell id = rowProduct.createCell(0);
-            id.setCellValue(product.getId());
+            id.setCellValue(i);
 
             Cell name = rowProduct.createCell(1);
             name.setCellValue(product.getName());
@@ -153,22 +157,20 @@ public class ExportToExcel {
         quantity.setCellValue("TOTAL:");
 
         Cell totalPrice = rowProduct.createCell(4);
-        totalPrice.setCellValue(productService.totalPrise());
+        totalPrice.setCellValue(getProductService.totalPrise());
 
         // название и путь для нашего файла (по умолчанию в корне проекта)
         String filename = "src/main/webapp/WEB-INF/downloads/xls/check.xls";
 
         try (FileOutputStream out = new FileOutputStream(filename)) {
             workbook.write(out);
-            File file = new File(filename);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return listProduct;
     }
 
     @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
+    public void setGetProductService(GetProductService getProductService) {
+        this.getProductService = getProductService;
     }
 }

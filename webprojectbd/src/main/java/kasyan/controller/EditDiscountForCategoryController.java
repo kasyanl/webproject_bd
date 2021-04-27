@@ -1,6 +1,6 @@
 package kasyan.controller;
 
-import kasyan.service.ProductService;
+import kasyan.service.UpdateProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ import java.sql.SQLException;
 @RequestMapping(value = "/product")
 public class EditDiscountForCategoryController {
 
-    private ProductService productService;
+    private UpdateProductService updateProductService;
 
     // получение страницы с формой для изменения скидки для категории ALCOHOLIC_BEVERAGES
     @GetMapping(value = "/alcoholdiscount")
@@ -26,7 +26,7 @@ public class EditDiscountForCategoryController {
     // отправка заданной скидки для категории ALCOHOLIC_BEVERAGES
     @PostMapping(value = "/alcoholdiscount")
     public ModelAndView editAlcoholDiscount(@RequestParam(value = "discount") double discount) throws SQLException {
-        productService.updateDiscountForCategory("ALCOHOLIC_BEVERAGES", discount);
+        updateProductService.updateDiscountForCategory("ALCOHOLIC_BEVERAGES", discount);
         return new ModelAndView("redirect:/product/finealcohol");
     }
 
@@ -39,7 +39,7 @@ public class EditDiscountForCategoryController {
     // отправка заданной скидки для категории FRUITS
     @PostMapping(value = "/fruitsdiscount")
     public ModelAndView editFruitsDiscount(@RequestParam(value = "discount") double discount) throws SQLException {
-        productService.updateDiscountForCategory("FRUITS", discount);
+        updateProductService.updateDiscountForCategory("FRUITS", discount);
         return new ModelAndView("redirect:/product/finefruits");
     }
 
@@ -52,9 +52,10 @@ public class EditDiscountForCategoryController {
     // отправка заданной скидки для категории BERRIES
     @PostMapping(value = "/berriesdiscount")
     public ModelAndView editBerriesDiscount(@RequestParam(value = "discount") double discount) throws SQLException {
-        productService.updateDiscountForCategory("BERRIES", discount);
+        updateProductService.updateDiscountForCategory("BERRIES", discount);
         return new ModelAndView("redirect:/product/fineberries");
     }
+
     // получение страницы с формой для изменения скидки для категории VEGETABLES
     @GetMapping(value = "/vegetablesdiscount")
     public String vegetablesDiscountPage() {
@@ -64,7 +65,7 @@ public class EditDiscountForCategoryController {
     // отправка заданной скидки для категории VEGETABLES
     @PostMapping(value = "/vegetablesdiscount")
     public ModelAndView editVegetablesDiscount(@RequestParam(value = "discount") double discount) throws SQLException {
-        productService.updateDiscountForCategory("VEGETABLES", discount);
+        updateProductService.updateDiscountForCategory("VEGETABLES", discount);
         return new ModelAndView("redirect:/product/finevegetables");
     }
 
@@ -77,9 +78,10 @@ public class EditDiscountForCategoryController {
     // отправка заданной скидки для категории MILK_PRODUCT
     @PostMapping(value = "/milkproductdiscount")
     public ModelAndView editMilkProductDiscount(@RequestParam(value = "discount") double discount) throws SQLException {
-        productService.updateDiscountForCategory("MILK_PRODUCT", discount);
+        updateProductService.updateDiscountForCategory("MILK_PRODUCT", discount);
         return new ModelAndView("redirect:/product/finemilkproduct");
     }
+
     // получение страницы с формой для изменения скидки для категории MEAT
     @GetMapping(value = "/meatdiscount")
     public String meatDiscountPage() {
@@ -89,12 +91,12 @@ public class EditDiscountForCategoryController {
     // отправка заданной скидки для категории MEAT
     @PostMapping(value = "/meatdiscount")
     public ModelAndView editMeatDiscount(@RequestParam(value = "discount") double discount) throws SQLException {
-        productService.updateDiscountForCategory("MEAT", discount);
+        updateProductService.updateDiscountForCategory("MEAT", discount);
         return new ModelAndView("redirect:/product/finemeat");
     }
 
     @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
+    public void setUpdateProductService(UpdateProductService updateProductService) {
+        this.updateProductService = updateProductService;
     }
 }

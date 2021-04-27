@@ -1,6 +1,6 @@
 package kasyan.controller;
 
-import kasyan.service.ProductService;
+import kasyan.service.GetProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +13,14 @@ import java.sql.SQLException;
 @RequestMapping(value = "/product")
 public class SearchCategoryController {
 
-    private ProductService productService;
+    private GetProductService getProductService;
 
     // получение списка категории FRUITS
     @GetMapping(value = "/finefruits")
     public ModelAndView fineFruits() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/finecategory/finefruits");
-        modelAndView.addObject("product", productService.fineCategoryForRead("FRUITS"));
+        modelAndView.addObject("product", getProductService.fineCategoryForRead("FRUITS"));
         return modelAndView;
     }
 
@@ -29,7 +29,7 @@ public class SearchCategoryController {
     public ModelAndView fineBerries() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/finecategory/fineberries");
-        modelAndView.addObject("product", productService.fineCategoryForRead("BERRIES"));
+        modelAndView.addObject("product", getProductService.fineCategoryForRead("BERRIES"));
         return modelAndView;
     }
 
@@ -38,7 +38,7 @@ public class SearchCategoryController {
     public ModelAndView fineVegetables() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/finecategory/finevegetables");
-        modelAndView.addObject("product", productService.fineCategoryForRead("VEGETABLES"));
+        modelAndView.addObject("product", getProductService.fineCategoryForRead("VEGETABLES"));
         return modelAndView;
     }
 
@@ -47,7 +47,7 @@ public class SearchCategoryController {
     public ModelAndView fineMilkProduct() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/finecategory/finemilkproduct");
-        modelAndView.addObject("product", productService.fineCategoryForRead("MILK_PRODUCT"));
+        modelAndView.addObject("product", getProductService.fineCategoryForRead("MILK_PRODUCT"));
         return modelAndView;
     }
 
@@ -56,7 +56,7 @@ public class SearchCategoryController {
     public ModelAndView fineAlcohol() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/finecategory/finealcohol");
-        modelAndView.addObject("product", productService.fineCategoryForRead("ALCOHOLIC_BEVERAGES"));
+        modelAndView.addObject("product", getProductService.fineCategoryForRead("ALCOHOLIC_BEVERAGES"));
         return modelAndView;
     }
 
@@ -65,7 +65,7 @@ public class SearchCategoryController {
     public ModelAndView fineMeat() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/finecategory/finemeat");
-        modelAndView.addObject("product", productService.fineCategoryForRead("MEAT"));
+        modelAndView.addObject("product", getProductService.fineCategoryForRead("MEAT"));
         return modelAndView;
     }
 
@@ -74,7 +74,7 @@ public class SearchCategoryController {
     public ModelAndView fineFruitsGuest() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/finecategory/finefruitsguest");
-        modelAndView.addObject("product", productService.fineCategoryForRead("FRUITS"));
+        modelAndView.addObject("product", getProductService.fineCategoryForRead("FRUITS"));
         return modelAndView;
     }
 
@@ -83,7 +83,7 @@ public class SearchCategoryController {
     public ModelAndView fineBerriesGuest() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/finecategory/fineberriesguest");
-        modelAndView.addObject("product", productService.fineCategoryForRead("BERRIES"));
+        modelAndView.addObject("product", getProductService.fineCategoryForRead("BERRIES"));
         return modelAndView;
     }
 
@@ -92,7 +92,7 @@ public class SearchCategoryController {
     public ModelAndView fineVegetablesGuest() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/finecategory/finevegetablesguest");
-        modelAndView.addObject("product", productService.fineCategoryForRead("VEGETABLES"));
+        modelAndView.addObject("product", getProductService.fineCategoryForRead("VEGETABLES"));
         return modelAndView;
     }
 
@@ -101,7 +101,7 @@ public class SearchCategoryController {
     public ModelAndView fineMilkProductGuest() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/finecategory/finemilkproductguest");
-        modelAndView.addObject("product", productService.fineCategoryForRead("MILK_PRODUCT"));
+        modelAndView.addObject("product", getProductService.fineCategoryForRead("MILK_PRODUCT"));
         return modelAndView;
     }
 
@@ -110,7 +110,7 @@ public class SearchCategoryController {
     public ModelAndView fineAlcoholGuest() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/finecategory/finealcoholguest");
-        modelAndView.addObject("product", productService.fineCategoryForRead("ALCOHOLIC_BEVERAGES"));
+        modelAndView.addObject("product", getProductService.fineCategoryForRead("ALCOHOLIC_BEVERAGES"));
         return modelAndView;
     }
 
@@ -119,12 +119,12 @@ public class SearchCategoryController {
     public ModelAndView fineMeatGuest() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/finecategory/finemeatguest");
-        modelAndView.addObject("product", productService.fineCategoryForRead("MEAT"));
+        modelAndView.addObject("product", getProductService.fineCategoryForRead("MEAT"));
         return modelAndView;
     }
 
     @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
+    public void setGetProductService(GetProductService getProductService) {
+        this.getProductService = getProductService;
     }
 }

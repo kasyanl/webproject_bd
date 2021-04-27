@@ -1,10 +1,9 @@
-
-<%@ page import="kasyan.service.ProductService" %>
+<%@ page import="kasyan.service.GetProductService" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    ProductService productService = new ProductService();
-    double totalPrise= productService.totalPrise();
+    GetProductService getProductService = new GetProductService();
+    double totalPrise= getProductService.totalPrise();
 %>
 <!DOCTYPE html>
 <html lang="ru">
@@ -59,12 +58,12 @@
         <th><b> BYN </b></th>
     </tr>
 </table>
-<a href="${pageContext.request.contextPath}/product/checkend" title="Завершить покупку">
-    <input type="image" src="${pageContext.request.contextPath}/download/xls/save.jpg"
-           width="50" height="50" alt="Экспорт в Excel файл" value="Завершить покупку"></a>
+<a href="${pageContext.request.contextPath}/product/checkend" title="Оплатить">
+    <input type="image" src="${pageContext.request.contextPath}/download/xls/kassa.png"
+           width="100" height="100" alt="Оплатить" value="Оплатить"></a>
 <a href="${pageContext.request.contextPath}/product/failbuyproduct" title="Отмена">
-    <input type="image" src="${pageContext.request.contextPath}/download/xls/save.jpg"
-           width="50" height="50" alt="Экспорт в Excel файл" value="Отмена"></a>
+    <input type="image" src="${pageContext.request.contextPath}/download/xls/del.png"
+           width="100" height="100" alt="Отмена" value="Отмена"></a>
 <br>
 <br>
 <br>

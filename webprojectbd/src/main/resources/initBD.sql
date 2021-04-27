@@ -30,7 +30,7 @@ CREATE TABLE productOfDelete
 
 CREATE TABLE buyproduct
 (
-    id          INTEGER primary key auto_increment,
+    id          INTEGER,
     name        VARCHAR(255)     NOT NULL,
     actualPrice DOUBLE DEFAULT 0 NOT NULL,
     quantity    DOUBLE DEFAULT 0 NOT NULL,

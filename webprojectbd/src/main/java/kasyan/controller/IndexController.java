@@ -1,7 +1,7 @@
 package kasyan.controller;
 
-import kasyan.service.ExportToExcel;
-import kasyan.service.ProductService;
+import kasyan.service.ExportToExcelService;
+import kasyan.service.GetProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
 @RequestMapping(value = "/")
 public class IndexController {
 
-    private ProductService productService;
+    private GetProductService getProductService;
 
     //получение стартовой страницы
     @GetMapping
@@ -51,7 +51,7 @@ public class IndexController {
     public ModelAndView exportExcelDel() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexceldel");
-        modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAllDeleted()));
+        modelAndView.addObject("product", ExportToExcelService.exportAllList(getProductService.findAllDeleted()));
         return modelAndView;
     }
 
@@ -60,7 +60,7 @@ public class IndexController {
     public ModelAndView exportExcel() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexcel");
-        modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAll()));
+        modelAndView.addObject("product", ExportToExcelService.exportAllList(getProductService.findAll()));
         return modelAndView;
     }
 
@@ -69,12 +69,12 @@ public class IndexController {
     public ModelAndView exportExcelGuest() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/exportexcelguest");
-        modelAndView.addObject("product", ExportToExcel.exportAllList(productService.findAll()));
+        modelAndView.addObject("product", ExportToExcelService.exportAllList(getProductService.findAll()));
         return modelAndView;
     }
 
     @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
+    public void setGetProductService(GetProductService getProductService) {
+        this.getProductService = getProductService;
     }
 }

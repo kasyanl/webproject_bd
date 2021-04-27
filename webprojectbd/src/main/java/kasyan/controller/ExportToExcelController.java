@@ -1,6 +1,6 @@
 package kasyan.controller;
 
-import kasyan.service.ExportToExcel;
+import kasyan.service.ExportToExcelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +13,14 @@ import java.sql.SQLException;
 @RequestMapping(value = "/product")
 public class ExportToExcelController {
 
-    private ExportToExcel exportToExcel;
+    private ExportToExcelService exportToExcelService;
 
     // получение списка категории ALCOHOLIC_BEVERAGES
     @GetMapping(value = "/exportexcel/alcohol")
     public ModelAndView exportExcelAlcohol() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexcel/alcohol");
-        modelAndView.addObject("product", exportToExcel.exportCategoryList("ALCOHOLIC_BEVERAGES"));
+        modelAndView.addObject("product", exportToExcelService.exportCategoryList("ALCOHOLIC_BEVERAGES"));
         return modelAndView;
     }
 
@@ -29,7 +29,7 @@ public class ExportToExcelController {
     public ModelAndView exportExcelBerries() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexcel/berries");
-        modelAndView.addObject("product", exportToExcel.exportCategoryList("BERRIES"));
+        modelAndView.addObject("product", exportToExcelService.exportCategoryList("BERRIES"));
         return modelAndView;
     }
 
@@ -38,7 +38,7 @@ public class ExportToExcelController {
     public ModelAndView exportExcelFruits() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexcel/fruits");
-        modelAndView.addObject("product", exportToExcel.exportCategoryList("FRUITS"));
+        modelAndView.addObject("product", exportToExcelService.exportCategoryList("FRUITS"));
         return modelAndView;
     }
 
@@ -47,7 +47,7 @@ public class ExportToExcelController {
     public ModelAndView exportExcelMeat() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexcel/meat");
-        modelAndView.addObject("product", exportToExcel.exportCategoryList("MEAT"));
+        modelAndView.addObject("product", exportToExcelService.exportCategoryList("MEAT"));
         return modelAndView;
     }
 
@@ -56,7 +56,7 @@ public class ExportToExcelController {
     public ModelAndView exportExcelMikl() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexcel/milk");
-        modelAndView.addObject("product", exportToExcel.exportCategoryList("MILK_PRODUCT"));
+        modelAndView.addObject("product", exportToExcelService.exportCategoryList("MILK_PRODUCT"));
         return modelAndView;
     }
 
@@ -65,7 +65,7 @@ public class ExportToExcelController {
     public ModelAndView exportExcelVegetables() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/exportexcel/vegetables");
-        modelAndView.addObject("product", exportToExcel.exportCategoryList("VEGETABLES"));
+        modelAndView.addObject("product", exportToExcelService.exportCategoryList("VEGETABLES"));
         return modelAndView;
     }
 
@@ -74,7 +74,7 @@ public class ExportToExcelController {
     public ModelAndView exportExcelAlcoholGuest() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/exportexcel/alcoholguest");
-        modelAndView.addObject("product", exportToExcel.exportCategoryList("ALCOHOLIC_BEVERAGES"));
+        modelAndView.addObject("product", exportToExcelService.exportCategoryList("ALCOHOLIC_BEVERAGES"));
         return modelAndView;
     }
 
@@ -83,7 +83,7 @@ public class ExportToExcelController {
     public ModelAndView exportExcelBerriesGuest() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/exportexcel/berriesguest");
-        modelAndView.addObject("product", exportToExcel.exportCategoryList("BERRIES"));
+        modelAndView.addObject("product", exportToExcelService.exportCategoryList("BERRIES"));
         return modelAndView;
     }
 
@@ -92,7 +92,7 @@ public class ExportToExcelController {
     public ModelAndView exportExcelFruitsGuest() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/exportexcel/fruitsguest");
-        modelAndView.addObject("product", exportToExcel.exportCategoryList("FRUITS"));
+        modelAndView.addObject("product", exportToExcelService.exportCategoryList("FRUITS"));
         return modelAndView;
     }
 
@@ -101,7 +101,7 @@ public class ExportToExcelController {
     public ModelAndView exportExcelMeatGuest() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/exportexcel/meatguest");
-        modelAndView.addObject("product", exportToExcel.exportCategoryList("MEAT"));
+        modelAndView.addObject("product", exportToExcelService.exportCategoryList("MEAT"));
         return modelAndView;
     }
 
@@ -110,7 +110,7 @@ public class ExportToExcelController {
     public ModelAndView exportExcelMiklGuest() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/exportexcel/milkguest");
-        modelAndView.addObject("product", exportToExcel.exportCategoryList("MILK_PRODUCT"));
+        modelAndView.addObject("product", exportToExcelService.exportCategoryList("MILK_PRODUCT"));
         return modelAndView;
     }
 
@@ -119,12 +119,12 @@ public class ExportToExcelController {
     public ModelAndView exportExcelVegetablesGuest() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("guestpages/exportexcel/vegetablesguest");
-        modelAndView.addObject("product", exportToExcel.exportCategoryList("VEGETABLES"));
+        modelAndView.addObject("product", exportToExcelService.exportCategoryList("VEGETABLES"));
         return modelAndView;
     }
 
     @Autowired
-    public void setExportToExcel(ExportToExcel exportToExcel) {
-        this.exportToExcel = exportToExcel;
+    public void setExportToExcel(ExportToExcelService exportToExcelService) {
+        this.exportToExcelService = exportToExcelService;
     }
 }

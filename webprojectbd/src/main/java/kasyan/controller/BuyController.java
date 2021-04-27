@@ -1,8 +1,10 @@
 package kasyan.controller;
 
 import kasyan.exceptions.ProductNotFoundException;
-import kasyan.service.ExportToExcel;
-import kasyan.service.ProductService;
+import kasyan.service.DeleteProductService;
+import kasyan.service.ExportToExcelService;
+import kasyan.service.GetProductService;
+import kasyan.service.UpdateProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,24 +19,25 @@ import java.sql.SQLException;
 @RequestMapping(value = "/product")
 public class BuyController {
 
-    private ProductService productService;
-    private ExportToExcel exportToExcel;
+    private DeleteProductService deleteProductService;
+    private ExportToExcelService exportToExcelService;
+    private GetProductService getProductService;
+    private UpdateProductService updateProductService;
 
     // получение страницы с формой для добавления продукта
     @GetMapping(value = "/buystarted")
     public ModelAndView buyStarted() throws SQLException {
-        productService.cleanBuyDB();
-        productService.startTransaction();
-        productService.autocommit();
+        deleteProductService.cleanBuyDB();
         return new ModelAndView("adminpages/buystarted");
 
     }
+
     // получение страницы с формой для добавления продукта
     @GetMapping(value = "/buyproduct")
     public ModelAndView buyProductGet() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/buyproduct");
-        modelAndView.addObject("product", productService.findAll());
+        modelAndView.addObject("product", getProductService.findAll());
         return modelAndView;
     }
 
@@ -42,7 +45,7 @@ public class BuyController {
     @PostMapping(value = "/buyproduct")
     public ModelAndView buyProductPost(@RequestParam(value = "id") int id,
                                        @RequestParam(value = "quantity") double quantity) throws SQLException, ProductNotFoundException {
-        productService.bayProduct(id, quantity);
+        updateProductService.bayProduct(id, quantity);
         return new ModelAndView("redirect:/product/buyproduct");
     }
 
@@ -51,7 +54,7 @@ public class BuyController {
     public ModelAndView endBuyProductGet() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/endbuyproduct");
-        modelAndView.addObject("product", productService.findAllBuyProduct());
+        modelAndView.addObject("product", getProductService.findAllBuyProduct());
         return modelAndView;
     }
 
@@ -60,33 +63,43 @@ public class BuyController {
     public ModelAndView checkend() throws SQLException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminpages/checkend");
-        exportToExcel.check(productService.findAllBuyProduct());
-        productService.endTransaction();
-        modelAndView.addObject("product", productService.findAllBuyProduct());
+        exportToExcelService.check(getProductService.findAllBuyProduct());
+        updateProductService.endTransaction();
+        modelAndView.addObject("product", getProductService.findAllBuyProduct());
         return modelAndView;
     }
 
     // получение страницы с сообщением, что продукт удален из основной БД
     @GetMapping(value = "/deleteproductbuy")
-    public ModelAndView deleteproduct(@RequestParam(value = "id") int id) throws  SQLException {
-        productService.deletebuy(id);
+    public ModelAndView deleteproduct(@RequestParam(value = "id") int id) throws SQLException {
+        deleteProductService.deleteBuy(id);
         return new ModelAndView("redirect:/product/endbuyproduct");
     }
 
     // получение страницы с сообщением, что продукт удален из основной БД
     @GetMapping(value = "/failbuyproduct")
-    public ModelAndView failbuyproduct() throws  SQLException {
-        productService.rollBack();
+    public ModelAndView failbuyproduct() throws SQLException {
+        deleteProductService.cleanBuyDB();
         return new ModelAndView("adminpages/failbuyproduct");
     }
 
     @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
+    public void setExportToExcel(ExportToExcelService exportToExcelService) {
+        this.exportToExcelService = exportToExcelService;
     }
 
     @Autowired
-    public void setExportToExcel(ExportToExcel exportToExcel) {
-        this.exportToExcel = exportToExcel;
+    public void setDeleteProductService(DeleteProductService deleteProductService) {
+        this.deleteProductService = deleteProductService;
+    }
+
+    @Autowired
+    public void setGetProductService(GetProductService getProductService) {
+        this.getProductService = getProductService;
+    }
+
+    @Autowired
+    public void setUpdateProductService(UpdateProductService updateProductService) {
+        this.updateProductService = updateProductService;
     }
 }

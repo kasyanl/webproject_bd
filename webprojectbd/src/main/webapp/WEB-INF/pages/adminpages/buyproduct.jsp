@@ -1,11 +1,9 @@
-
-<%@ page import="kasyan.service.ProductService" %>
+<%@ page import="kasyan.service.GetProductService" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    ProductService productService = new ProductService();
-    double totalPrise= productService.totalPrise();
-
+    GetProductService getProductService = new GetProductService();
+    double totalPrise= getProductService.totalPrise();
 %>
 <!DOCTYPE html>
 <html lang="ru">
@@ -60,9 +58,9 @@
             <td colspan="2" align="center"><c:out value="${product.getTotalVolume()}"/></td>
             <td>
                 <form action="${pageContext.request.contextPath}/product/buyproduct?id=${product.getId()}" title="добавить" method="post">
-                    <label><input name="quantity" placeholder="количество товара, кг(шт)"
-                                  type="text"></label> <input type="image" src="${pageContext.request.contextPath}/download/xls/save.jpg"
-                                width="15" height="15" alt="Добавить новый продукт" value="добавить">
+                    <label><input size="10" name="quantity" placeholder="...а, кг(шт)"
+                                  type="text"></label> <input type="image" src="${pageContext.request.contextPath}/download/xls/add.png"
+                                width="20" height="20" alt="Добавить новый продукт" value="добавить">
                 </form>
             </td>
         </tr>
@@ -80,9 +78,9 @@
         <th colspan="2"><b><%=totalPrise%></b></th>
         <th colspan="2"><b> BYN </b></th>
         <th>
-            <a href="${pageContext.request.contextPath}/product/endbuyproduct" title="Экспортировать в excel">
-                <input type="image" src="${pageContext.request.contextPath}/download/xls/save.jpg"
-                       width="20" height="20" alt="Экспорт в Excel файл" value="Экспорт в Excel файл"></a>
+            <a href="${pageContext.request.contextPath}/product/endbuyproduct" title="Оформить покупку">
+                <input type="image" src="${pageContext.request.contextPath}/download/xls/kassa.png"
+                       width="80" height="80" alt="Оформить покупку" value="Оформить покупку"></a>
         </th>
         <th></th>
     </tr>
