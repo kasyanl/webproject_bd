@@ -7,7 +7,7 @@
 <%@include file="../header.jsp" %>
 <%@include file="nav.jsp" %>
 <h3>Список покупок очищен. Для продолжения работы выберите соответствующий пункт</h3>
-<
+
 <br>
 <br>
 <a href="${pageContext.request.contextPath}/content">Back</a>

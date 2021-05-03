@@ -44,6 +44,13 @@
             <artifactId>poi-ooxml</artifactId>
             <version>${apache.poi-ooxml}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20201115</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.springframework</groupId>
