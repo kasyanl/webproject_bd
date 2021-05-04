@@ -45,7 +45,8 @@ public class RepositoryService {
                 double discount = rs.getDouble("discount");
                 double actualPrice = rs.getDouble("actualPrice");
                 double totalVolume = rs.getDouble("totalVolume");
-                productList.add(new Product(id, category, name, price, discount, actualPrice, totalVolume));
+                String data = rs.getString("data");
+                productList.add(new Product(id, category, name, price, discount, actualPrice, totalVolume, data));
             }
             rs.close();
             statement.close();
@@ -61,30 +62,6 @@ public class RepositoryService {
             log.info("Product is {}", rs);
             statement.close();
             conn.close();
-    }
-
-    //запрос на вывод Product данных из корзины (формирование List)
-    public List<Product> findDeleteProductFromBD(String sqlSelect) throws SQLException {
-
-        List<Product> productListDel = new ArrayList<>();
-        Connection conn = getConnection();
-        Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery(sqlSelect);
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String category = rs.getString("category");
-                String name = rs.getString("name");
-                double price = rs.getDouble("price");
-                double discount = rs.getDouble("discount");
-                double actualPrice = rs.getDouble("actualPrice");
-                double totalVolume = rs.getDouble("totalVolume");
-                String data = rs.getString("data");
-                productListDel.add(new Product(id, category, name, price, discount, actualPrice, totalVolume, data));
-            }
-            rs.close();
-            statement.close();
-            conn.close();
-        return productListDel;
     }
 
     //запрос на получение Person данных из БД (формирование List)

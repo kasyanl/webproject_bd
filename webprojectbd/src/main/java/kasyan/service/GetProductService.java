@@ -14,14 +14,14 @@ public class GetProductService extends RepositoryService {
 
     //отправка запроса на получение всех продуктов из основной БД
     public List<Product> findAll() throws SQLException {
-        String select = "SELECT id, category, name, price, discount, ROUND (actualPrice, 2) AS actualPrice, ROUND (totalVolume, 3) AS totalVolume FROM product";
+        String select = "SELECT id, category, name, price, discount, ROUND (actualPrice, 2) AS actualPrice, ROUND (totalVolume, 3) AS totalVolume, data  FROM product";
         return findProductFromBD(select);
     }
 
     //отправка запроса на получение всех ранее удаленных продуктов из основной БД
     public List<Product> findAllDeleted() throws SQLException {
         String select = "SELECT id, category, name, price, discount, ROUND (actualPrice, 2) AS actualPrice, ROUND (totalVolume, 3) AS totalVolume, data FROM productofdelete";
-        return findDeleteProductFromBD(select);
+        return findProductFromBD(select);
     }
 
     //отправка запроса на получение всех ранее удаленных продуктов из основной БД
@@ -50,7 +50,7 @@ public class GetProductService extends RepositoryService {
                 newListForRead.add(product);
             }
         }
-        String select = "SELECT id, category, name, price, discount, actualPrice, totalVolume FROM product WHERE category='" + category + "'";
+        String select = "SELECT id, category, name, price, discount, actualPrice, totalVolume, data  FROM product WHERE category='" + category + "'";
         findProductFromBD(select);
         return newListForRead;
     }

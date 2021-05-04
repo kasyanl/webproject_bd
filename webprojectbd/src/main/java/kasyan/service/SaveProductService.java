@@ -19,8 +19,8 @@ public class SaveProductService extends RepositoryService {
         List<Product> newList = getProductService.findAll();
         int id = createId(newList);
         double actualPrice = calculating(price, discount);
-        String select = "INSERT product (id, category, name, price, discount, actualPrice, totalVolume) VALUES (" + id +
-                " ,'" + category + "' ,'" + name + "' ," + price + " ," + discount + " ," + actualPrice + " ," + totalVolume + ")";
+        String select = "INSERT product (id, category, name, price, discount, actualPrice, totalVolume, data) VALUES (" + id +
+                " ,'" + category + "' ,'" + name + "' ," + price + " ," + discount + " ," + actualPrice + " ," + totalVolume + ", NOW())";
         selectBD(select);
     }
 

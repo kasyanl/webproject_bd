@@ -20,7 +20,7 @@ public class UpdateProductService extends RepositoryService {
     public void update(int id, String category, String name, double price, double discount, double totalVolume) throws SQLException {
         double actualPrice = calculating(price, discount);
         String select = "UPDATE product SET category='" + category + "', name='" + name + "', price=" + price +
-                ", discount=" + discount + ", actualPrice=" + actualPrice + ", totalVolume=" + totalVolume + " WHERE id=" + id;
+                ", discount=" + discount + ", actualPrice=" + actualPrice + ", totalVolume=" + totalVolume + ", data=NOW() WHERE id=" + id;
         selectBD(select);
     }
 
@@ -45,7 +45,7 @@ public class UpdateProductService extends RepositoryService {
     public void endTransaction() throws SQLException {
         List<Product> newList = getProductService.findAllBuyProduct();
         for (Product product : newList) {
-            selectBD("UPDATE product SET totalVolume=totalVolume-" + product.getQuantity() + " WHERE id=" + product.getId());
+            selectBD("UPDATE product SET totalVolume=totalVolume-" + product.getQuantity() + ", data=NOW() WHERE id=" + product.getId());
         }
     }
 
