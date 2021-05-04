@@ -19,7 +19,7 @@
 <body>
 <div id="footer">
    <font color="black"> &copy; kasyanl<br>
-       <a href="https://moodle.jrr.by/">Курсы по JAVA on-line</a></font>
+       <a href="https://moodle.jrr.by/" target="_blank">Курсы по JAVA on-line</a></font>
   </div>
 </body>
 </html>

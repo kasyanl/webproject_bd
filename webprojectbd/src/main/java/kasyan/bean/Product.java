@@ -38,14 +38,4 @@ public class Product {
         this.totalPrice = totalPrice;
         this.quantity = quantity;
     }
-
-    public Product(int id, String category, String name, double price, double discount, double actualPrice, double totalVolume) {
-        this.id = id;
-        this.category = category;
-        this.name = name;
-        this.price = price;
-        this.discount = discount;
-        this.actualPrice = actualPrice;
-        this.totalVolume = totalVolume;
-    }
 }
