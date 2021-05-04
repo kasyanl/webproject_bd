@@ -55,7 +55,7 @@ public class GetProductService extends RepositoryService {
         return newListForRead;
     }
 
-    // расчет суммы покупок
+    // расчет общей суммы покупок
     public double totalPrise() throws SQLException {
         List<Product> newList = findAllBuyProduct();
         double count = 0;
@@ -65,10 +65,14 @@ public class GetProductService extends RepositoryService {
         return count;
     }
 
+    // проверка, чтобы не ввести больше количество,
+    public boolean checkingForNumber(double quantity, double totalVolume) {
+        return quantity <= totalVolume;
+    }
+
     // проверка, пуста ли корзина
     public boolean basketIsEmpty() throws SQLException {
         List<Product> newList = findAllDeleted();
-        if (newList.isEmpty()) return true;
-        else return false;
+        return newList.isEmpty();
     }
 }

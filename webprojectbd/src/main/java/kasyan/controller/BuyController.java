@@ -44,8 +44,12 @@ public class BuyController {
     // отправка данных для добавления продуктов в БД и перенаправления на страницу со всем списком
     @PostMapping(value = "/buyproduct")
     public ModelAndView buyProductPost(@RequestParam(value = "id") int id,
-                                       @RequestParam(value = "quantity") double quantity) throws SQLException, ProductNotFoundException {
-        updateProductService.bayProduct(id, quantity);
+                                       @RequestParam(value = "quantity") double quantity,
+                                       @RequestParam(value = "totalVolume") double totalVolume) throws SQLException, ProductNotFoundException {
+        if (getProductService.checkingForNumber(quantity, totalVolume)) {
+            updateProductService.bayProduct(id, quantity);
+            return new ModelAndView("redirect:/product/buyproduct");
+        }
         return new ModelAndView("redirect:/product/buyproduct");
     }
 

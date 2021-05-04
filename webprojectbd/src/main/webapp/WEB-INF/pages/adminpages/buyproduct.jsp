@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     GetProductService getProductService = new GetProductService();
-    double totalPrise= getProductService.totalPrise();
+    double totalPrise = getProductService.totalPrise();
 %>
 <!DOCTYPE html>
 <html lang="ru">
@@ -57,25 +57,30 @@
             <td colspan="2" align="center"><c:out value="${product.getActualPrice()}"/></td>
             <td colspan="2" align="center"><c:out value="${product.getTotalVolume()}"/></td>
             <td>
-                <form action="${pageContext.request.contextPath}/product/buyproduct?id=${product.getId()}" title="добавить" method="post">
-                    <label><input size="10" name="quantity" placeholder="...а, кг(шт)"
-                                  type="text"></label> <input type="image" src="${pageContext.request.contextPath}/download/xls/add.png"
-                                width="20" height="20" alt="Добавить новый продукт" value="добавить">
+                <form action="${pageContext.request.contextPath}/product/buyproduct?id=${product.getId()}&totalVolume=${product.getTotalVolume()}"
+                      title="добавить"
+                      method="post"><label><input size="10" name="quantity" placeholder="...а, кг(шт)"
+                                                  type="text"></label> <input type="image"
+                                                                              src="${pageContext.request.contextPath}/download/xls/add.png"
+                                                                              width="20" height="20"
+                                                                              alt="Добавить новый продукт"
+                                                                              value="добавить">
                 </form>
             </td>
         </tr>
     </c:forEach>
-    <tr> </tr>
-    <tr> </tr>
-    <tr> </tr>
-    <tr> </tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
     <tr>
         <th colspan="2"></th>
         <th colspan="2"></th>
         <th colspan="2"></th>
         <th colspan="2"></th>
         <th colspan="2">Итого:</th>
-        <th colspan="2"><b><%=totalPrise%></b></th>
+        <th colspan="2"><b><%=totalPrise%>
+        </b></th>
         <th colspan="2"><b> BYN </b></th>
         <th>
             <a href="${pageContext.request.contextPath}/product/endbuyproduct" title="Оформить покупку">

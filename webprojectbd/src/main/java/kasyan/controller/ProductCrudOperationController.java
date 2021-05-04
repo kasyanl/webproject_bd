@@ -59,7 +59,7 @@ public class ProductCrudOperationController {
     // получение всего списка продуктов из корзины
     @GetMapping(value = "/bascket")
     public ModelAndView bascket() throws SQLException {
-        if(!getProductService.basketIsEmpty()) {
+        if (!getProductService.basketIsEmpty()) {
             return new ModelAndView("redirect:/product/alldeletedproduct");
         }
         return new ModelAndView("adminpages/bascketempty");
@@ -81,7 +81,7 @@ public class ProductCrudOperationController {
 
     // получение страницы с сообщением, что продукт удален из основной БД
     @GetMapping(value = "/deleteproduct")
-    public ModelAndView deleteproduct(@RequestParam(value = "id") int id) throws  SQLException {
+    public ModelAndView deleteproduct(@RequestParam(value = "id") int id) throws SQLException {
         deleteProductService.delete(id);
         return new ModelAndView("adminpages/deleteproduct");
     }
