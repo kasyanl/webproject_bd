@@ -38,4 +38,5 @@ public class Product {
         this.totalPrice = totalPrice;
         this.quantity = quantity;
     }
+    
 }

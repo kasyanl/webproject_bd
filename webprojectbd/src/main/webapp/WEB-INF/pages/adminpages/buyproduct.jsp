@@ -10,8 +10,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Касса</title>
+    <style>
+        body {
+            background-color: #CCFFCC;
+            background-image: url(${pageContext.request.contextPath}/download/xls/bg.jpg);
+        }
+    </style>
 </head>
-<body align="center" background="${pageContext.request.contextPath}/download/xls/bg.jpg" bgcolor="#CCFFCC">
+<body align="center">
 <%@include file="../header.jsp" %>
 <h1>Выберите </h1>
 

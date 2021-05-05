@@ -4,8 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Система учета продуктов</title>
+    <style>
+        body {
+            background-color: #CCFFCC;
+            background-image: url(${pageContext.request.contextPath}/download/xls/bg.jpg);
+        }
+    </style>
 </head>
-<body align="center" background="${pageContext.request.contextPath}/download/xls/bg.jpg" bgcolor="#CCFFCC">
+<body align="center">
 <%@include file="../header.jsp"%>
 <%@include file="nav.jsp" %>
 <h1>Выберите категориию:</h1>

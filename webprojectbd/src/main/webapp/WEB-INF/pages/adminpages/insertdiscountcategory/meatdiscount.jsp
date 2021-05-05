@@ -1,9 +1,15 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
     <title>Изменение данных.</title>
+    <style>
+        body {
+            background-color: #CCFFCC;
+            background-image: url(${pageContext.request.contextPath}/download/xls/bg.jpg);
+        }
+    </style>
 </head>
-<body align="center" background="${pageContext.request.contextPath}/download/xls/bg.jpg" bgcolor="#CCFFCC">
+<body align="center">
 <%@include file="../../header.jsp"%>
 <%@include file="../nav.jsp"%>
 <h2>Установите новую единую скидку для категории MEAT:</h2>

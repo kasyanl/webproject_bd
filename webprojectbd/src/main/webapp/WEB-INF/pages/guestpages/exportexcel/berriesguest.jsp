@@ -2,8 +2,14 @@
 <html>
 <head>
     <title>Экспорт данных</title>
+    <style>
+        body {
+            background-color: #CCFFCC;
+            background-image: url(${pageContext.request.contextPath}/download/xls/bg.jpg);
+        }
+    </style>
 </head>
-<body align="center" background="${pageContext.request.contextPath}/download/xls/bg.jpg" bgcolor="#CCFFCC">
+<body align="center">
 <%@include file="../../header.jsp"%>
 <%@include file="../navguest.jsp"%>
 <h3>Список список категории <b>BERRIES</b> успешно сформирован. Нажмите на значок, для скачивания</h3>

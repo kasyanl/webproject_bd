@@ -4,8 +4,14 @@
 <html>
 <head>
     <title>Учет продуктов</title>
+    <style>
+        body {
+            background-color: #CCFFCC;
+            background-image: url(${pageContext.request.contextPath}/download/xls/bg.jpg);
+        }
+    </style>
 </head>
-<body align="center" background="${pageContext.request.contextPath}/download/xls/bg.jpg" bgcolor="#CCFFCC">
+<body align="center">
 <%@include file="../../header.jsp"%>
 <%@include file="../navguest.jsp"%>
 <h1>Весь список продуктов</h1>
