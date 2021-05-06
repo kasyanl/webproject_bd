@@ -1,6 +1,6 @@
 <%@ page import="kasyan.service.GetProductService" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%
     GetProductService getProductService = new GetProductService();
     double totalPrise= getProductService.totalPrise();
@@ -33,8 +33,6 @@
         <th idth="100" align="center"><b> количество</b></th>
         <th width="100" align="center"><b> конечная цена, BYN</b></th>
         <th width="100" align="center"><b></b></th>
-
-
     </tr>
 
     <c:forEach var="product" items="${product}">

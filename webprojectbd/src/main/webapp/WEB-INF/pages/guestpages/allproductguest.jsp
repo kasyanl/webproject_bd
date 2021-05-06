@@ -13,8 +13,8 @@
     </style>
 </head>
 <body align="center">
-<%@include file="../header.jsp"%>
-<%@include file="navguest.jsp"%>
+<%@include file="../header.jsp" %>
+<%@include file="navguest.jsp" %>
 <h1>Весь список продуктов</h1>
 
 <h3 align="right"><a href="${pageContext.request.contextPath}/exportexcelguest">
@@ -31,22 +31,7 @@
         <th colspan="2" width="100" align="center"><b> конечная цена, BYN</b></th>
         <th colspan="2" width="100" align="center"><b> наличие, кг(шт)</b></th>
     </tr>
-    <tr>
-        <th><a href="${pageContext.request.contextPath}/product/sortbyidguest"> &#x21D1; </a></th>
-        <th><a href="${pageContext.request.contextPath}/product/sortbyidreverseguest">&#x21D3; </a></th>
-        <th><a href="${pageContext.request.contextPath}/product/sortbycategoryguest">&#x21D1; </a></th>
-        <th><a href="${pageContext.request.contextPath}/product/sortbycategoryreverseguest">&#x21D3; </a></th>
-        <th><a href="${pageContext.request.contextPath}/product/sortbynameguest">&#x21D1; </a></th>
-        <th><a href="${pageContext.request.contextPath}/product/sortbynamereverseguest">&#x21D3;</a></th>
-        <th><a href="${pageContext.request.contextPath}/product/sortbypriceguest">&#x21D1; </a></th>
-        <th><a href="${pageContext.request.contextPath}/product/sortbypricereverseguest">&#x21D3; </a></th>
-        <th><a href="${pageContext.request.contextPath}/product/sortbydiscountguest">&#x21D1; </a></th>
-        <th><a href="${pageContext.request.contextPath}/product/sortbydiscountreverseguest">&#x21D3; </a></th>
-        <th><a href="${pageContext.request.contextPath}/product/sortbyactualpriceguest">&#x21D1; </a></th>
-        <th><a href="${pageContext.request.contextPath}/product/sortbyactualpricereverseguest">&#x21D3; </a></th>
-        <th><a href="${pageContext.request.contextPath}/product/sortbytotalvolumeguest">&#x21D1; </a></th>
-        <th><a href="${pageContext.request.contextPath}/product/sortbytotalvolumereverseguest">&#x21D3; </a></th>
-    </tr>
+    <%@include file="sortelementguest.jsp" %>
     <c:forEach var="product" items="${product}">
         <tr>
             <td colspan="2" align="center"><c:out value="${product.getId()}"/></td>
@@ -72,7 +57,7 @@
 <a href="${pageContext.request.contextPath}/contentguest">Back</a>
 <br>
 <br>
-<%@include file="../footer.jsp"%>
+<%@include file="../footer.jsp" %>
 <br>
 <br>
 </body>

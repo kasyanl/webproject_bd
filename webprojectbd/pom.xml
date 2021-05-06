@@ -12,13 +12,13 @@
     <properties>
         <java.version>11</java.version>
         <spring.mvc>5.2.13.RELEASE</spring.mvc>
-        <spring.data>2.4.7</spring.data>
+        <spring.data>2.5.0</spring.data>
         <spring.test>5.3.5</spring.test>
         <spring.context>5.3.3</spring.context>
         <spring.core>5.3.5</spring.core>
         <javax.servlet>4.0.1</javax.servlet>
         <mysql.version>8.0.19</mysql.version>
-        <hb.manager>5.4.27.SP1</hb.manager>
+        <hb.manager>5.4.29.Final</hb.manager>
         <junit.version>4.13.1</junit.version>
         <jetty.MP>9.4.38.v20210224</jetty.MP>
         <apache.poi>5.0.0</apache.poi>
@@ -49,6 +49,13 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20201115</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.0-api -->
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <version>1.0.1.Final</version>
         </dependency>
 
 
@@ -114,6 +121,11 @@
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.10.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.29.Final</version>
         </dependency>
     </dependencies>
     <build>
